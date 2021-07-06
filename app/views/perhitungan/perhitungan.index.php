@@ -3,6 +3,7 @@
  * @var $criteria
  * @var $nasabah
  * @var $head
+ * @var $ranking
  * @var $namaKriteria
  * @var $namaNasabah
  */
@@ -156,7 +157,7 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <?php $i = 0; foreach ($namaNasabah as $nasabah => $value) { ?>
+                                    <?php $i = 0; foreach ($ranking as $nasabah => $value) { ?>
                                         <tr role="row" class="even">
                                             <td class="sorting_1"><?= ++$i; ?></td>
                                             <td class="sorting_1"><?= $nasabah; ?></td>

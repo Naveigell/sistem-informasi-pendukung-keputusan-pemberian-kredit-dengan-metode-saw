@@ -37,10 +37,10 @@ class CriteriaController extends Controller {
 
     public function update()
     {
-        $request    = $this->request->getAllData();
-        $nama       = $request->name;
-        $bobot      = $request->weight;
-        $keterangan = $request->property;
+        $request        = $this->request->getAllData();
+        $nama           = $request->name;
+        $bobot          = $request->weight;
+        $keterangan     = $request->property;
 
         $model = new CriteriaModel();
 
@@ -69,6 +69,7 @@ class CriteriaController extends Controller {
         $id             = $request['id'];
         $subKriteria    = $request['sub-kriteria'];
         $subNilai       = $request['sub-nilai'];
+        $idSubCriteria  = $request['id_subkriteria'];
 
         $subKriteria    = array_filter($subKriteria, function ($item) {
             return !empty($item);
@@ -80,7 +81,7 @@ class CriteriaController extends Controller {
 
         if (count($subKriteria) === count($subNilai)) {
             $model = new CriteriaModel();
-            $row = $model->updateSubCriteria($id, $subKriteria, $subNilai);
+            $row = $model->updateSubCriteria($id, $idSubCriteria, $subKriteria, $subNilai);
 
             if ($row > 0) {
                 $this->session->set('success', 'Ubah sub kriteria berhasil');

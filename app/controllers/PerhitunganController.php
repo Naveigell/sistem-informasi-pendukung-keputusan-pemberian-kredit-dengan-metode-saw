@@ -7,79 +7,98 @@ use App\Models\CriteriaModel;
 use App\Models\PerhitunganModel;
 
 class PerhitunganController extends Controller {
+
+    private function removeNasabahNumericKey(array &$data)
+    {
+        foreach ($data as $key => $value) {
+            foreach ($value as $k => $v) {
+                if (is_numeric($k)) {
+                    unset($data[$key][$k]);
+                }
+            }
+        }
+    }
+
     public function index()
     {
         $model = new PerhitunganModel();
         $nasabah = $model->getAll();
-        $collection = new Collection($nasabah);
-        $namaKriteria = new CriteriaModel();
-        $namaKriteria = (new Collection($namaKriteria->all()))->pluck('nama_kriteria');
+        $nasabahCollection = new Collection($nasabah);
 
-        $bobotKriteria = new CriteriaModel();
-        $bobotKriteria = (new Collection($bobotKriteria->all()))->pluck('bobot_kriteria');
+        $namaKriteria       = new CriteriaModel();
+        $kriteria           = $namaKriteria->all();
+        $kriteriaCollection = new Collection($kriteria);
 
-        $keteranganKriteria = new CriteriaModel();
-        $keteranganKriteria = (new Collection($keteranganKriteria->all()))->pluck('ket_kriteria');
+        $namaKriteria       = $kriteriaCollection->pluck('nama_kriteria');
+        $bobotKriteria      = $kriteriaCollection->pluck('bobot_kriteria');
+        $keteranganKriteria = $kriteriaCollection->pluck('ket_kriteria');
 
-        $namaNasabah = $collection->groupBy('nama_nsb');
-//        echo "<pre>";
+        $namaNasabah = $nasabahCollection->groupBy('nama_nsb');
+
         foreach ($namaNasabah as $key => $value) {
-            $c = new Collection($namaNasabah[$key]);
-            $namaNasabah[$key]['nilai_fields'] = $c->pluck('nilai');
+            $nilai =  (new Collection($namaNasabah[$key]))->pluck('nilai');
+            $namaNasabah[$key]['nilai_fields'] = $nilai;
+
+            // if nilai fields count length less than $namaKriteria, add default value into nilai_fields
+            // the default value is 1
             if (count($namaNasabah[$key]['nilai_fields']) < count($namaKriteria)) {
                 array_push($namaNasabah[$key]['nilai_fields'], 1);
             }
         }
-        $row = new Collection($namaNasabah);
-        $values = [];
 
-        $plucked = $row->pluck('nilai_fields');
+        $namaNasabahCollection = new Collection($namaNasabah);
+        $nilaiFieldsColumn = [];
 
-        foreach ($plucked as $key => $value) {
+        $nilaiFields = $namaNasabahCollection->pluck('nilai_fields');
+
+        // merge nilai_fields into each column
+        foreach ($nilaiFields as $key => $value) {
             foreach ($value as $k => $v) {
-                if (!isset($values[$k])) {
-                    $values[$k] = [$v];
+                if (!isset($nilaiFieldsColumn[$k])) {
+                    $nilaiFieldsColumn[$k] = [$v];
                 } else {
-                    array_push($values[$k], $v);
+                    array_push($nilaiFieldsColumn[$k], $v);
                 }
             }
         }
 
-        for ($i = 0; $i < count($values); $i++) {
-            SimpleAdditiveWeighting::addData($values[$i], $bobotKriteria[$i], strtoupper($keteranganKriteria[$i]));
+        // add each column into simple additive weighting library
+        for ($i = 0; $i < count($nilaiFieldsColumn); $i++) {
+            SimpleAdditiveWeighting::addData($nilaiFieldsColumn[$i], $bobotKriteria[$i], strtoupper($keteranganKriteria[$i]));
         }
 
+        // normalize the data
         SimpleAdditiveWeighting::normalize();
 
         $i = 0;
+        // get normalization result then transpose it and add into nasabah normalization
         $transpose = (new Collection(SimpleAdditiveWeighting::normalizationResult(SimpleAdditiveWeighting::ONLY_DATA)))->transpose();
         foreach ($namaNasabah as $key => $value) {
             $namaNasabah[$key]['normalization'] = $transpose[$i++];
         }
+
+        // calculate and get the result
         SimpleAdditiveWeighting::calculate();
         $result = SimpleAdditiveWeighting::result();
 
         $i = 0;
+        // add the result into nasabah
         foreach ($namaNasabah as $key => $value) {
             $namaNasabah[$key]['result'] = $result[$i++];
-
-            foreach ($value as $k => $v) {
-                if (is_numeric($k)) {
-                    unset($namaNasabah[$key][$k]);
-                }
-            }
         }
 
-        $ranking = (new Collection($namaNasabah))->sortByKey('result');
+        // remove unused array in nasabah
+        $this->removeNasabahNumericKey($namaNasabah);
 
-//        echo "<pre/>";
+        // sort the ranking
+        $ranking = (new Collection($namaNasabah))->sortByKey('result', Collection::SORT_DESC);
 
         view('includes/layout', [
             'content'       => "perhitungan/perhitungan.index",
             'head'          => 5,
             'namaKriteria'  => $namaKriteria,
             'namaNasabah'   => $namaNasabah,
-            'rangking'      => $ranking,
+            'ranking'       => $ranking,
         ]);
     }
 }

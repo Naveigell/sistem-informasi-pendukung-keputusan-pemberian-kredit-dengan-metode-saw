@@ -106,6 +106,13 @@ class Model {
         return $query->rowCount();
     }
 
+    public function updateMultiple($sql, $bindings = [])
+    {
+        $query = $this->connection->prepare($sql, $bindings);
+        $query->execute();
+        return $query->rowCount();
+    }
+
     public function insert($data = [])
     {
         $keys = array_keys($data);

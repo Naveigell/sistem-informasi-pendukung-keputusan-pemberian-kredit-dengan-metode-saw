@@ -16,36 +16,45 @@ class CriteriaModel extends Model {
         return $this->query("SELECT * FROM $this->table INNER JOIN sub_kriteria ON $this->table.id_kriteria = sub_kriteria.id_kriteria GROUP BY sub_kriteria.id_subkriteria");
     }
 
-    public function updateSubCriteria($idKriteria, $subKriteria, $subNilai)
+    public function updateSubCriteria($idKriteria, $idSubKriteria, $subKriteria, $subNilai)
     {
-        $sql = "";
-        $bindings = [];
+        $nilai = [
+            "cases"     => $idSubKriteria,
+            "key"       => "id_subkriteria",
+            "values"    => $subNilai
+        ];
 
-        for ($i = 0; $i < count($subKriteria); $i++) {
-            $kriteria   = $subKriteria[$i];
-            $nilai      = $subNilai[$i];
+        $kriteria = [
+            "cases"     => $idSubKriteria,
+            "key"       => "id_subkriteria",
+            "values"    => $subKriteria
+        ];
 
-            $sql .= "(?,?,?)";
+        $string1 = $this->bulkUpdateSql($nilai['key'], $nilai);
+        $ids1 = implode(',', $nilai['cases']);
+        $key1 = $nilai['key'];
 
-            if ($i !== count($subKriteria) - 1) {
-                $sql .= ",";
+        $string2 = $this->bulkUpdateSql($kriteria['key'], $kriteria, true);
+
+        $sql = "UPDATE sub_kriteria SET nilai = (CASE $string1 END), ket = (CASE $string2 END) WHERE id_kriteria = $idKriteria AND $key1 IN($ids1)";
+
+        return $this->updateMultiple($sql, []);
+    }
+
+    private function bulkUpdateSql($key, $data = [], $addQuotes = false)
+    {
+        $sql = $key;
+        for ($i = 0; $i < count($data['values']); $i++) {
+            $case = $data['cases'][$i];
+            $value = $data['values'][$i];
+
+            if (!$addQuotes) {
+                $sql .= " WHEN $case THEN $value ";
+            } else {
+                $sql .= " WHEN $case THEN '$value' ";
             }
-
-            $bindings = array_merge($bindings, [$idKriteria, $kriteria, $nilai]);
         }
 
-        $this->connection->beginTransaction();
-        try {
-            $this->delete([
-                "id_kriteria"       => $idKriteria
-            ], 'sub_kriteria');
-            $row = $this->insertMultiple("INSERT INTO sub_kriteria(id_kriteria, ket, nilai) VALUES".$sql, $bindings);
-
-            $this->connection->commit();
-        } catch (\Exception $exception) {
-            $this->connection->rollBack();
-        }
-
-        return $row;
+        return $sql;
     }
 }
