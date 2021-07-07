@@ -25,6 +25,13 @@
                     </p>
                     <a href="<?= BASE_PATH; ?>/criteria/insert" class="btn btn-primary btn-sm mt-3" style="color: white;"><i class="fa fa-plus"></i>&nbsp;Tambah kriteria</a>
                 </div>
+                <div class="card-body">
+                    <?php if (flashHas('success')) { ?>
+                        <div class="alert alert-success" role="alert">
+                            <strong>Success!</strong> <?php echo flashGet('success'); ?>
+                        </div>
+                    <?php } ?>
+                </div>
                 <div class="table-responsive py-4">
                     <div id="datatable-basic_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
@@ -51,18 +58,18 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php for ($i = 0; $i < count($criteria); $i++) { ?>
-                                            <tr role="row" class="even">
-                                                <td class="sorting_1"><?= $i + 1; ?></td>
-                                                <td><?= $criteria[$i]['nama_kriteria']; ?></td>
-                                                <td><?= $criteria[$i]['bobot_kriteria']; ?></td>
-                                                <td><?= $criteria[$i]['ket_kriteria']; ?></td>
-                                                <td>
-                                                    <a href="<?= BASE_PATH; ?>/criteria/edit?id=<?= $criteria[$i]['id_kriteria'] ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah</a>
-                                                    <a style="color: white;" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Hapus</a>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
+                                    <?php for ($i = 0; $i < count($criteria); $i++) { ?>
+                                        <tr role="row" class="even">
+                                            <td class="sorting_1"><?= $i + 1; ?></td>
+                                            <td><?= $criteria[$i]['nama_kriteria']; ?></td>
+                                            <td><?= $criteria[$i]['bobot_kriteria']; ?></td>
+                                            <td><?= $criteria[$i]['ket_kriteria']; ?></td>
+                                            <td>
+                                                <a href="<?= BASE_PATH; ?>/criteria/edit?id=<?= $criteria[$i]['id_kriteria'] ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah</a>
+                                                <a style="color: white;" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Hapus</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -54,6 +54,10 @@ class Collection {
 
     public function transpose()
     {
+        if (count($this->collections) <= 0) {
+            return $this->collections;
+        }
+
         array_unshift($this->collections, null);
         return call_user_func_array('array_map', $this->collections);
     }

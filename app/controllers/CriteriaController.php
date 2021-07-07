@@ -71,14 +71,6 @@ class CriteriaController extends Controller {
         $subNilai       = $request['sub-nilai'];
         $idSubCriteria  = $request['id_subkriteria'];
 
-        $subKriteria    = array_filter($subKriteria, function ($item) {
-            return !empty($item);
-        });
-
-        $subNilai       = array_filter($subNilai, function ($item) {
-            return $item > 0;
-        });
-
         if (count($subKriteria) === count($subNilai)) {
             $model = new CriteriaModel();
             $row = $model->updateSubCriteria($id, $idSubCriteria, $subKriteria, $subNilai);

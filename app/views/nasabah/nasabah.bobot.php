@@ -38,9 +38,9 @@
                             </div>
                         <?php } ?>
                         <hr>
-                        <?php if (errorHas('error')) { ?>
+                        <?php if (flashHas('error')) { ?>
                             <div class="alert alert-danger" role="alert">
-                                <strong>Error!</strong> <?php echo errorGet('error'); ?>
+                                <strong>Error!</strong> <?php echo flashGet('error'); ?>
                             </div>
                         <?php } ?>
                         <form action="/nasabah/bobot" method="post" class="needs-validation" novalidate="">

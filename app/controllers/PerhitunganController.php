@@ -5,6 +5,7 @@ use App\Libraries\Collection;
 use App\Libraries\SimpleAdditiveWeighting;
 use App\Models\CriteriaModel;
 use App\Models\PerhitunganModel;
+use function Couchbase\defaultDecoder;
 
 class PerhitunganController extends Controller {
 
@@ -48,12 +49,14 @@ class PerhitunganController extends Controller {
             $collection = new Collection($namaNasabah[$key]);
             $nilai      = $collection->pluck('nilai');
             $nama       = $collection->pluck('nama_kriteria');
-            $namaNasabah[$key]['nilai_fields'] = $nilai;
+            $namaNasabah[$key]['nilai_fields'] = (is_null($nilai) ? 1 : $nilai);
 
             $combined = [];
             if (count($nama) === count($nilai)) {
                 $combined = array_combine($nama, $nilai);
             }
+
+            $this->removeNullOrEmptyValue($combined);
 
             if (count($namaKriteria) > count($combined)) {
                 foreach ($namaKriteria as $namaKey) {
@@ -71,16 +74,10 @@ class PerhitunganController extends Controller {
                 }
             }
 
-            $this->removeNullOrEmptyValue($combined);
-//            dump($key);
-//            dump($combined);
-
             $namaNasabah[$key]['nilai_fields'] = array_values($combined);
-
-//            dump("-------------------");
         }
 
-//        dump($namaNasabah);
+        $this->removeNasabahNumericKey($namaNasabah);
 
         $namaNasabahCollection = new Collection($namaNasabah);
         $nilaiFieldsColumn = [];
@@ -108,13 +105,13 @@ class PerhitunganController extends Controller {
 
         $i = 0;
         // get normalization result then transpose it and add into nasabah normalization
-        $transpose = (new Collection(SimpleAdditiveWeighting::normalizationResult(SimpleAdditiveWeighting::ONLY_DATA)))->transpose();
+        $transpose = (new Collection(SimpleAdditiveWeighting::normalizationResult()))->transpose();
         foreach ($namaNasabah as $key => $value) {
-            $namaNasabah[$key]['normalization'] = $transpose[$i++];
+            // $t is mean transpose
+            $t = count($transpose) <= 0 ? 0 : $transpose[$i++];
+            $namaNasabah[$key]['normalization'] = is_array($t) ? $t : [$t]; // check if $t is an array, if not, put it into an array
         }
         $this->removeNasabahNumericKey($namaNasabah);
-
-//        dump($namaNasabah);
 
         // calculate and get the result
         SimpleAdditiveWeighting::calculate();
@@ -123,7 +120,7 @@ class PerhitunganController extends Controller {
         $i = 0;
         // add the result into nasabah
         foreach ($namaNasabah as $key => $value) {
-            $namaNasabah[$key]['result'] = $result[$i++];
+            $namaNasabah[$key]['result'] = is_null($result) || count($result) <= 0 ? 0 : $result[$i++];
         }
 
         // remove unused array in nasabah

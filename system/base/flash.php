@@ -4,7 +4,7 @@ function abort404(){
     echo "404 not found";
 }
 
-function errorGet($key) {
+function flashGet($key) {
     $session = new System\Session\Session();
     $flash = $session->get($key);
     $session->forget($key);
@@ -12,7 +12,7 @@ function errorGet($key) {
     return $flash;
 }
 
-function errorHas($key){
+function flashHas($key){
     $session = new System\Session\Session();
     return $session->has($key);
 }

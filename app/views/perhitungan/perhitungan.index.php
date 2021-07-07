@@ -93,8 +93,10 @@
                                             No
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Alternatif</th>
-                                        <?php foreach ($namaKriteria as $nama) { ?>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nama; ?></th>
+                                        <?php if (count($namaKriteria) > 0) { ?>
+                                            <?php foreach ($namaKriteria as $nama) { ?>
+                                                <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nama; ?></th>
+                                            <?php } ?>
                                         <?php } ?>
                                     </tr>
                                     </thead>
@@ -102,8 +104,10 @@
                                     <tr>
                                         <th rowspan="1" colspan="1">No</th>
                                         <th rowspan="1" colspan="1">Alternatif</th>
-                                        <?php foreach ($namaKriteria as $nama) { ?>
-                                            <th rowspan="1" colspan="1"><?= ucfirst($nama); ?></th>
+                                        <?php if (count($namaKriteria) > 0) { ?>
+                                            <?php foreach ($namaKriteria as $nama) { ?>
+                                                <th rowspan="1" colspan="1"><?= ucfirst($nama); ?></th>
+                                            <?php } ?>
                                         <?php } ?>
                                     </tr>
                                     </tfoot>
@@ -112,8 +116,10 @@
                                         <tr role="row" class="even">
                                             <td class="sorting_1"><?= ++$i; ?></td>
                                             <td class="sorting_1"><?= $nasabah; ?></td>
-                                            <?php foreach ($value['normalization'] as $nilai) { ?>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nilai; ?></th>
+                                            <?php if (count($namaKriteria) > 0) { ?>
+                                                <?php foreach ($value['normalization'] as $nilai) { ?>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nilai; ?></th>
+                                                <?php } ?>
                                             <?php } ?>
                                         </tr>
                                     <?php } ?>

@@ -1,7 +1,7 @@
 <?php
 
-function dump($args){
+function dump(...$args){
     echo "<pre>";
-    var_dump($args);
+    var_dump(...$args);
     echo "</pre>";
 }
