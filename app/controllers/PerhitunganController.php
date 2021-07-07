@@ -5,7 +5,6 @@ use App\Libraries\Collection;
 use App\Libraries\SimpleAdditiveWeighting;
 use App\Models\CriteriaModel;
 use App\Models\PerhitunganModel;
-use function Couchbase\defaultDecoder;
 
 class PerhitunganController extends Controller {
 
@@ -75,6 +74,9 @@ class PerhitunganController extends Controller {
             }
 
             $namaNasabah[$key]['nilai_fields'] = array_values($combined);
+            if (count($value) > 0) {
+                $namaNasabah[$key]['id'] = $value[0][0];
+            }
         }
 
         $this->removeNasabahNumericKey($namaNasabah);
@@ -125,6 +127,9 @@ class PerhitunganController extends Controller {
 
         // remove unused array in nasabah
         $this->removeNasabahNumericKey($namaNasabah);
+
+        // sort $namaNasabah by id
+        $namaNasabah = (new Collection($namaNasabah))->sortByKey('id');
 
         // sort the ranking
         $ranking = (new Collection($namaNasabah))->sortByKey('result', Collection::SORT_DESC);

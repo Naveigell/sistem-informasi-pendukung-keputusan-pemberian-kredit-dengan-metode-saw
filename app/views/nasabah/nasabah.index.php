@@ -26,6 +26,13 @@
                     </p>
                     <a href="<?= BASE_PATH; ?>/nasabah/insert" class="btn btn-primary btn-sm mt-3" style="color: white;"><i class="fa fa-plus"></i>&nbsp;Tambah nasabah</a>
                 </div>
+                <div class="card-body">
+                    <?php if (flashHas('success')) { ?>
+                        <div class="alert alert-success" role="alert">
+                            <strong>Success!</strong> <?php echo flashGet('success'); ?>
+                        </div>
+                    <?php } ?>
+                </div>
                 <div class="table-responsive py-4">
                     <div id="datatable-basic_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
@@ -64,7 +71,7 @@
                                             <td>
                                                 <a href="<?= BASE_PATH; ?>/nasabah/edit?id=<?= $nasabah[$i]['id_cln_nsb']; ?>" style="color: white;" type="button" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah Biodata</a>
                                                 <a href="<?= BASE_PATH; ?>/nasabah/bobot?id=<?= $nasabah[$i]['id_cln_nsb'];; ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah Kriteria</a>
-                                                <a style="color: white;" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Hapus</a>
+                                                <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_cln_nsb']; ?>" type="button" class="btn btn-danger btn-sm button-delete"><i class="fa fa-trash"></i>&nbsp; Hapus</button>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -73,6 +80,45 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        $(document).ready(function () {
+                            const buttons = $(".button-delete");
+                            for (const button of buttons) {
+                                button.addEventListener('click', function (evt) {
+                                    const id = evt.target.getAttribute('data-id');
+                                    const name = evt.target.getAttribute('data-name');
+
+                                    Swal.fire({
+                                        title: `Yakin menghapus nasabah <b>${name}</b>?`,
+                                        text: "Data yang dihapus tidak akan bisa dikembalikan",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Hapus',
+                                        cancelButtonText: 'Batal'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: `<?= BASE_PATH; ?>/nasabah/delete?id=${id}`,
+                                                success: function (response) {
+                                                    console.log(response)
+                                                    Swal.fire(
+                                                        'Berhasil dihapus!',
+                                                        response.message,
+                                                        'success'
+                                                    ).then(() => {
+                                                        window.location.reload();
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    })
+                                });
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>

@@ -38,11 +38,22 @@ class Collection {
         return $plucked;
     }
 
+    public function sort($type = self::SORT_ASC)
+    {
+        $temp = $this->collections;
+        if ($type === self::SORT_ASC) {
+            ksort($temp);
+        } elseif ($type === self::SORT_DESC) {
+            krsort($temp);
+        }
+
+        return $temp;
+    }
+
     public function sortByKey($key, $type = self::SORT_ASC)
     {
         $temp = $this->collections;
         uasort($temp, function ($current, $next) use ($key, $type) {
-            error_log($current[$key]);
             if ($type === self::SORT_ASC) {
                 return $current[$key] > $next[$key];
             }

@@ -66,7 +66,7 @@
                                             <td><?= $criteria[$i]['ket_kriteria']; ?></td>
                                             <td>
                                                 <a href="<?= BASE_PATH; ?>/criteria/edit?id=<?= $criteria[$i]['id_kriteria'] ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah</a>
-                                                <a style="color: white;" type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; Hapus</a>
+                                                <button style="color: white;" data-name="<?= $criteria[$i]['nama_kriteria']; ?>" data-id="<?= $criteria[$i]['id_kriteria']; ?>" type="button" class="btn btn-danger btn-sm button-delete"><i class="fa fa-trash"></i>&nbsp; Hapus</button>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -75,6 +75,45 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        $(document).ready(function () {
+                            const buttons = $(".button-delete");
+                            for (const button of buttons) {
+                                button.addEventListener('click', function (evt) {
+                                    const id = evt.target.getAttribute('data-id');
+                                    const name = evt.target.getAttribute('data-name');
+
+                                    Swal.fire({
+                                        title: `Yakin menghapus kriteria <b>${name}</b>?`,
+                                        text: "Data yang dihapus tidak akan bisa dikembalikan",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Hapus',
+                                        cancelButtonText: 'Batal'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: `<?= BASE_PATH; ?>/criteria/delete?id=${id}`,
+                                                success: function (response) {
+                                                    console.log(response)
+                                                    Swal.fire(
+                                                        'Berhasil dihapus!',
+                                                        response.message,
+                                                        'success'
+                                                    ).then(() => {
+                                                        window.location.reload();
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    })
+                                });
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>

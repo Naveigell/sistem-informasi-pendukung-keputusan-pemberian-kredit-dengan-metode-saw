@@ -63,6 +63,24 @@ class CriteriaController extends Controller {
         }
     }
 
+    public function delete()
+    {
+        $row = (new CriteriaModel())->delete(["id_kriteria" => $_GET['id']]);
+        if ($row > 0) {
+            http_response_code(201);
+            echo json_encode([
+                "message" => "Kriteria berhasil dihapus",
+                "success" => true,
+            ]);
+        } else {
+            http_response_code(500);
+            echo json_encode([
+                "message" => "Terjadi kesalahan saat menghapus kriteria",
+                "success" => false,
+            ]);
+        }
+    }
+
     public function updateSubCriteria()
     {
         $request        = (array) $this->request->getAllData();

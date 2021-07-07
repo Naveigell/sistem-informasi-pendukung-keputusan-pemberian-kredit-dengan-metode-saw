@@ -2,7 +2,6 @@
 namespace App\Controllers;
 
 use App\Libraries\Collection;
-use App\Libraries\SimpleAdditiveWeighting;
 use App\Models\CriteriaModel;
 use App\Models\NasabahModel;
 use App\Models\PengajuanModel;
@@ -42,12 +41,88 @@ class NasabahController extends Controller {
         ]);
     }
 
+    public function edit()
+    {
+        $nasabah = (new NasabahModel())->first($_GET['id']);
+
+        view('includes/layout', [
+            'content'       => "nasabah/nasabah.edit",
+            'nasabah'       => $nasabah,
+        ]);
+    }
+
     public function updateBobot()
     {
         $request = $this->request->getAllData();
         $p = new PengajuanModel();
         $row = $p->createPengajuan($request->id, $request->kriteria, $request->sub_kriteria);
-        var_dump($row);
+
+        if ($row > 0) {
+            $this->session->set('success', 'Ubah pengajuan berhasil');
+            redirect('/nasabah');
+        } else {
+            $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
+            redirect('/nasabah/bobot?id='.$request->id);
+        }
+    }
+
+    public function delete()
+    {
+        $row = (new NasabahModel())->delete(["id_cln_nsb" => $_GET['id']]);
+        if ($row > 0) {
+            http_response_code(201);
+            echo json_encode([
+                "message" => "Nasabah berhasil dihapus",
+                "success" => true,
+            ]);
+        } else {
+            http_response_code(500);
+            echo json_encode([
+                "message" => "Terjadi kesalahan saat menghapus nasabah",
+                "success" => false,
+            ]);
+        }
+    }
+
+    public function update()
+    {
+        $request        = $this->request->getAllData();
+        $nama           = $request->nama;
+        $noKK           = $request->no_kk;
+        $nik            = $request->nik;
+        $tanggalLahir   = $request->tanggal_lahir;
+        $tempatLahir    = $request->tempat_lahir;
+        $alamat         = $request->alamat;
+        $agama          = $request->agama;
+        $email          = $request->email;
+        $noTelepon      = $request->no_telepon;
+        $jenisKelamin   = $request->jenis_kelamin;
+        $periode        = $request->periode;
+
+        $model = new NasabahModel();
+        $row = $model->update([
+            "nama_nsb"              => $nama,
+            "no_kk"                 => $noKK,
+            "no_nik"                => $nik,
+            "tempat_lahir"          => $tempatLahir,
+            "tgl_lahir"             => $tanggalLahir,
+            "alamat"                => $alamat,
+            "agama"                 => $agama,
+            "email"                 => $email,
+            "no_tlp"                => $noTelepon,
+            "jenis_kelamin"         => $jenisKelamin,
+            "periode"               => date("Y-m-d", strtotime($periode)),
+        ], [
+            "id_cln_nsb"            => $request->id
+        ]);
+
+        if ($row > 0) {
+            $this->session->set('success', 'Ubah data nasabah berhasil');
+            redirect('/nasabah');
+        } else {
+            $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
+            redirect('/nasabah/edit?id='.$request->id);
+        }
     }
 
     public function create()
@@ -60,7 +135,6 @@ class NasabahController extends Controller {
         $tanggalLahir   = $request->tanggal_lahir;
         $alamat         = $request->alamat;
         $agama          = $request->agama;
-        $email          = $request->email;
         $email          = $request->email;
         $noTelepon      = $request->no_telepon;
         $jenisKelamin   = $request->jenis_kelamin;
@@ -81,6 +155,12 @@ class NasabahController extends Controller {
             "periode"               => date("Y-m-d", strtotime($periode)),
         ]);
 
-        var_dump($row);
+        if ($row > 0) {
+            $this->session->set('success', 'Tambah nasabah berhasil');
+            redirect('/nasabah');
+        } else {
+            $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
+            redirect('/nasabah/insert');
+        }
     }
 }
