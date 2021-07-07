@@ -8,6 +8,15 @@ use App\Models\PerhitunganModel;
 
 class PerhitunganController extends Controller {
 
+    private function removeNullOrEmptyValue(array &$data)
+    {
+        foreach ($data as $key => $value) {
+            if (empty($key)) {
+                unset($data[$key]);
+            }
+        }
+    }
+
     private function removeNasabahNumericKey(array &$data)
     {
         foreach ($data as $key => $value) {
@@ -36,15 +45,42 @@ class PerhitunganController extends Controller {
         $namaNasabah = $nasabahCollection->groupBy('nama_nsb');
 
         foreach ($namaNasabah as $key => $value) {
-            $nilai =  (new Collection($namaNasabah[$key]))->pluck('nilai');
+            $collection = new Collection($namaNasabah[$key]);
+            $nilai      = $collection->pluck('nilai');
+            $nama       = $collection->pluck('nama_kriteria');
             $namaNasabah[$key]['nilai_fields'] = $nilai;
 
-            // if nilai fields count length less than $namaKriteria, add default value into nilai_fields
-            // the default value is 1
-            if (count($namaNasabah[$key]['nilai_fields']) < count($namaKriteria)) {
-                array_push($namaNasabah[$key]['nilai_fields'], 1);
+            $combined = [];
+            if (count($nama) === count($nilai)) {
+                $combined = array_combine($nama, $nilai);
             }
+
+            if (count($namaKriteria) > count($combined)) {
+                foreach ($namaKriteria as $namaKey) {
+                    $find = array_search($namaKey, array_keys($combined));
+                    if ($find === false) {
+                        $combined[$namaKey] = "1";
+                    }
+                }
+            } else {
+                foreach ($combined as $item) {
+                    $index = array_search($item, $namaKriteria);
+                    if ($index >= 0) {
+                        unset($combined[$index]);
+                    }
+                }
+            }
+
+            $this->removeNullOrEmptyValue($combined);
+//            dump($key);
+//            dump($combined);
+
+            $namaNasabah[$key]['nilai_fields'] = array_values($combined);
+
+//            dump("-------------------");
         }
+
+//        dump($namaNasabah);
 
         $namaNasabahCollection = new Collection($namaNasabah);
         $nilaiFieldsColumn = [];
@@ -76,6 +112,9 @@ class PerhitunganController extends Controller {
         foreach ($namaNasabah as $key => $value) {
             $namaNasabah[$key]['normalization'] = $transpose[$i++];
         }
+        $this->removeNasabahNumericKey($namaNasabah);
+
+//        dump($namaNasabah);
 
         // calculate and get the result
         SimpleAdditiveWeighting::calculate();

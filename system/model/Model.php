@@ -113,7 +113,7 @@ class Model {
         return $query->rowCount();
     }
 
-    public function insert($data = [])
+    public function insert($data = [], $getId = false)
     {
         $keys = array_keys($data);
         $values = array_values($data);
@@ -136,6 +136,9 @@ class Model {
             die($exception->getMessage());
         }
 
+        if ($getId) {
+            return $this->connection->lastInsertId();
+        }
         return $query->rowCount();
     }
 

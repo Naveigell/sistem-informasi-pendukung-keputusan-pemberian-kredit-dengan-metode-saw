@@ -100,12 +100,15 @@ class CriteriaController extends Controller {
         $bobot      = $request->weight;
         $keterangan = $request->property;
 
-        $model = new CriteriaModel();
-        $row = $model->insert([
+        $criteria = new CriteriaModel();
+        $subCriteria = new SubCriteriaModel();
+        $id = $criteria->insert([
             "nama_kriteria"         => $nama,
             "bobot_kriteria"        => $bobot,
             "ket_kriteria"          => $keterangan,
-        ]);
+        ], true);
+
+        $row = $subCriteria->insertSubCriteria($id);
 
         if ($row > 0) {
             $this->session->set('success', 'Tambah kriteria berhasil');

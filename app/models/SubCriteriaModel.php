@@ -9,4 +9,18 @@ class SubCriteriaModel extends Model {
     {
         return $this->query("SELECT * FROM $this->table WHERE id_kriteria=?", [$id]);
     }
+
+    public function insertSubCriteria($idKriteria, $count = 5)
+    {
+        $sql = "INSERT INTO sub_kriteria(id_kriteria, ket, nilai) VALUES";
+        for ($i = 0; $i < $count; $i++) {
+            $sql .= "($idKriteria, '', 1)";
+
+            if ($i !== $count - 1) {
+                $sql .= ",";
+            }
+        }
+
+        return $this->updateMultiple($sql);
+    }
 }
