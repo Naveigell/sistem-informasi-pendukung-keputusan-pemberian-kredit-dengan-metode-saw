@@ -24,6 +24,38 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
+                    <h3 class="mb-0">Periode</h3>
+                    <p class="text-sm mb-0">
+                        Pilih periode nasabah
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <form action="<?= BASE_PATH; ?>/perhitungan" method="GET">
+                            <div class="form-group">
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                    </div>
+                                    <input value="<?= isset($_GET["periode"]) && !empty($_GET["periode"]) ? date("Y-m", strtotime($_GET['periode'])) : ''; ?>" name="periode" class="form-control" placeholder="Periode ..." type="month">
+                                </div>
+                                <button class="btn btn-primary btn-sm mt-2" type="submit">
+                                    Pilih
+                                </button>
+                                <a href="<?= BASE_PATH; ?>/perhitungan" class="btn btn-info btn-sm mt-2" type="submit">
+                                    Tampil Semua
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
                     <h3 class="mb-0">Perhitungan</h3>
                     <p class="text-sm mb-0">
                         Halaman ini adalah tampilan saat sistem melakukan perhitungan alternatif

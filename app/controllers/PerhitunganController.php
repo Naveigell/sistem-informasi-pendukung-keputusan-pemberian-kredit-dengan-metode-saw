@@ -1,8 +1,8 @@
 <?php
 namespace App\Controllers;
 
-use App\Libraries\Collection;
-use App\Libraries\SimpleAdditiveWeighting;
+use System\Arrays\Collection;
+use System\Arrays\SimpleAdditiveWeighting;
 use App\Models\CriteriaModel;
 use App\Models\PerhitunganModel;
 
@@ -28,10 +28,29 @@ class PerhitunganController extends Controller {
         }
     }
 
+    private function parsePeriode()
+    {
+        $month = null;
+        $year = null;
+
+        if (isset($_GET["periode"]) && !empty($_GET["periode"])) {
+            $periode = explode("-", $_GET["periode"]);
+            $month = $periode[1];
+            $year = $periode[0];
+        }
+
+        return [
+            "month" => $month,
+            "year"  => $year
+        ];
+    }
+
     public function index()
     {
+        $periode = $this->parsePeriode();
+
         $model = new PerhitunganModel();
-        $nasabah = $model->getAll();
+        $nasabah = $model->getAll($periode["month"], $periode["year"]);
         $nasabahCollection = new Collection($nasabah);
 
         $namaKriteria       = new CriteriaModel();

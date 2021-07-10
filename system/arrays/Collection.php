@@ -1,5 +1,5 @@
 <?php
-namespace App\Libraries;
+namespace System\Arrays;
 
 class Collection {
     private $collections = [];

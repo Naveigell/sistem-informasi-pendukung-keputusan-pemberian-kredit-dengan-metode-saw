@@ -45,9 +45,9 @@
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-control-label" for="name">Nama Kriteria</label>
-                                    <input name="name" value="<?= $criteria[0]['nama_kriteria']; ?>" type="text" class="form-control" id="name" placeholder="Masukkan nama kriteria ...">
-                                    <div class="valid-feedback">
-                                        Looks good!
+                                    <input name="name" value="<?= $criteria[0]['nama_kriteria']; ?>" type="text" class="form-control <?= flashHas('error-name') ? 'is-invalid' : ''; ?>" id="name" placeholder="Masukkan nama kriteria ...">
+                                    <div class="invalid-feedback">
+                                        <?= flashGet('error-name')[0] ?>
                                     </div>
                                 </div>
                             </div>
@@ -62,14 +62,19 @@
                                         <input value="Benefit" <?= $criteria[0]['ket_kriteria'] == 'Benefit' ? 'checked' : '' ?> name="property" class="custom-control-input" id="customRadio6" type="radio">
                                         <label class="custom-control-label" for="customRadio6">Benefit</label>
                                     </div>
+                                    <?php if (flashHas('error-property')) { ?>
+                                        <div class="text text-danger text-xs">
+                                            <?= flashGet('error-property')[0] ?>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-control-label" for="weight">Bobot kriteria</label>
-                                    <input name="weight" value="<?= $criteria[0]['bobot_kriteria']; ?>" type="number" class="form-control" id="weight" placeholder="Masukkan bobot ...">
-                                    <div class="valid-feedback">
-                                        Looks good!
+                                    <input name="weight" value="<?= $criteria[0]['bobot_kriteria']; ?>" type="number" class="form-control <?= flashHas('error-weight') ? 'is-invalid' : ''; ?>" id="weight" placeholder="Masukkan bobot ...">
+                                    <div class="invalid-feedback">
+                                        <?= flashGet('error-weight')[0] ?>
                                     </div>
                                 </div>
                             </div>

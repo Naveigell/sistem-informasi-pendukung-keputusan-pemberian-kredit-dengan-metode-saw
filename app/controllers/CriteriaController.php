@@ -3,8 +3,23 @@ namespace App\Controllers;
 
 use App\Models\CriteriaModel;
 use App\Models\SubCriteriaModel;
+use System\Validation\Validator;
 
 class CriteriaController extends Controller {
+
+    /**
+     * @var Validator
+     */
+    private $validator;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->validator = new Validator();
+        $this->validator->storeToSession(true);
+    }
+
     public function index()
     {
         $model = new CriteriaModel();
@@ -38,27 +53,41 @@ class CriteriaController extends Controller {
     public function update()
     {
         $request        = $this->request->getAllData();
-        $nama           = $request->name;
-        $bobot          = $request->weight;
-        $keterangan     = $request->property;
 
-        $model = new CriteriaModel();
-
-        $data = [
-            "nama_kriteria"         => $nama,
-            "bobot_kriteria"        => $bobot,
-            "ket_kriteria"          => $keterangan,
-        ];
-
-        $row = $model->update($data, [
-            "id_kriteria"       => $request->id
+        $this->validator->make($_POST, [
+            "id"            => ["rules" => "required",],
+            "name"          => ["rules" => "required",],
+            "weight"        => ["rules" => "required",],
+            "property"      => ["rules" => "required",],
         ]);
 
-        if ($row > 0) {
-            $this->session->set('success', 'Ubah kriteria berhasil');
-            redirect('/criteria');
+        if ($this->validator->success()) {
+            $this->validator->clear();
+
+            $nama           = $request->name;
+            $bobot          = $request->weight;
+            $keterangan     = $request->property;
+
+            $model = new CriteriaModel();
+
+            $data = [
+                "nama_kriteria"         => $nama,
+                "bobot_kriteria"        => $bobot,
+                "ket_kriteria"          => $keterangan,
+            ];
+
+            $row = $model->update($data, [
+                "id_kriteria"       => $request->id
+            ]);
+
+            if ($row > 0) {
+                $this->session->set('success', 'Ubah kriteria berhasil');
+                redirect('/criteria');
+            } else {
+                $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
+                redirect('/criteria/edit?id='.$request->id);
+            }
         } else {
-            $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
             redirect('/criteria/edit?id='.$request->id);
         }
     }
@@ -106,25 +135,38 @@ class CriteriaController extends Controller {
     public function create()
     {
         $request    = $this->request->getAllData();
-        $nama       = $request->name;
-        $bobot      = $request->weight;
-        $keterangan = $request->property;
 
-        $criteria = new CriteriaModel();
-        $subCriteria = new SubCriteriaModel();
-        $id = $criteria->insert([
-            "nama_kriteria"         => $nama,
-            "bobot_kriteria"        => $bobot,
-            "ket_kriteria"          => $keterangan,
-        ], true);
+        $this->validator->make($_POST, [
+            "name"          => ["rules" => "required",],
+            "weight"        => ["rules" => "required",],
+            "property"      => ["rules" => "required",],
+        ]);
 
-        $row = $subCriteria->insertSubCriteria($id);
+        if ($this->validator->success()) {
+            $this->validator->clear();
 
-        if ($row > 0) {
-            $this->session->set('success', 'Tambah kriteria berhasil');
-            redirect('/criteria');
+            $nama       = $request->name;
+            $bobot      = $request->weight;
+            $keterangan = $request->property;
+
+            $criteria = new CriteriaModel();
+            $subCriteria = new SubCriteriaModel();
+            $id = $criteria->insert([
+                "nama_kriteria"         => $nama,
+                "bobot_kriteria"        => $bobot,
+                "ket_kriteria"          => $keterangan,
+            ], true);
+
+            $row = $subCriteria->insertSubCriteria($id);
+
+            if ($row > 0) {
+                $this->session->set('success', 'Tambah kriteria berhasil');
+                redirect('/criteria');
+            } else {
+                $this->session->set('error', 'Terjadi kesalahan saat menambah data');
+                redirect('/criteria/insert');
+            }
         } else {
-            $this->session->set('error', 'Terjadi kesalahan saat menambah data');
             redirect('/criteria/insert');
         }
     }
