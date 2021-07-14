@@ -7,6 +7,8 @@ use System\Validation\Validator;
 
 class CriteriaController extends Controller {
 
+    protected $denyUnloggedUser = true;
+
     /**
      * @var Validator
      */

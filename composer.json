@@ -1,0 +1,6 @@
+{
+    "name": "asus/sistem-pendukung-keputusan-kelayakan-pemberian-kredit",
+    "require": {
+        "dompdf/dompdf": "^1.0"
+    }
+}

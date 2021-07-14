@@ -3,6 +3,9 @@ use System\Router\Route;
 
 $router = new Route();
 $router->get('/', \App\Controllers\DashboardController::class, 'index');
+
+$router->get('/login', \App\Controllers\LoginController::class, 'login');
+$router->get('/logout', \App\Controllers\LoginController::class, 'logout');
 $router->post('/login', \App\Controllers\LoginController::class, 'doLogin');
 
 $router->get('/nasabah', \App\Controllers\NasabahController::class, 'index');
@@ -15,6 +18,7 @@ $router->post('/nasabah/update', \App\Controllers\NasabahController::class, 'upd
 $router->post('/nasabah/delete', \App\Controllers\NasabahController::class, 'delete');
 
 $router->get('/perhitungan', \App\Controllers\PerhitunganController::class, 'index');
+$router->get('/perhitungan/pdf', \App\Controllers\PerhitunganController::class, 'generatePDF');
 
 $router->get('/criteria', \App\Controllers\CriteriaController::class, 'index');
 $router->get('/criteria/edit', \App\Controllers\CriteriaController::class, 'edit');

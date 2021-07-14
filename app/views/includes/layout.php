@@ -2,6 +2,7 @@
 /**
  * @var $content
  * @var $data
+ * @var $fullscreen
  */
 ?>
 <!DOCTYPE html>
@@ -31,9 +32,17 @@
 </head>
 
 <body>
-<?php view('includes/sidebar'); ?>
+<?php if (isset($fullscreen)) {
+    if (!$fullscreen) view('includes/sidebar');
+} else {
+    view('includes/sidebar');
+} ?>
 <div class="main-content" id="panel">
-    <?php view('includes/header'); ?>
+    <?php if (isset($fullscreen)) {
+        if (!$fullscreen) view('includes/header');
+    } else {
+        view('includes/header');
+    } ?>
     <?php require_once("app/views/$content.php"); ?>
 </div>
 <script src="<?php echo BASE_PATH; ?>/public/assets/vendor/jquery/dist/jquery.min.js"></script>

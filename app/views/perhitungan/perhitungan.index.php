@@ -6,6 +6,7 @@
  * @var $ranking
  * @var $namaKriteria
  * @var $namaNasabah
+ * @var $periode
  */
 ?>
 <div class="header bg-primary pb-6">
@@ -172,6 +173,7 @@
                     <p class="text-sm mb-0">
                         Halaman ini adalah tampilan saat sistem melakukan perangkingan
                     </p>
+                    <a href="<?= BASE_PATH; ?>/perhitungan/pdf?periode=<?= $periode; ?>" class="btn btn-sm btn-primary mt-2"><i class="fa fa-print"></i> Print pdf</a>
                 </div>
                 <div class="table-responsive py-4">
                     <div id="datatable-basic_wrapper" class="dataTables_wrapper dt-bootstrap4">

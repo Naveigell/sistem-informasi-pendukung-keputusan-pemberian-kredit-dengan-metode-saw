@@ -2,11 +2,11 @@
 namespace App\Models;
 
 class UsersModel extends Model {
-    protected $table = 'users';
-    protected $primaryKey = 'id_users';
+    protected $table = 'user';
+    protected $primaryKey = 'id_user';
 
-    public function getUsers()
+    public function getUser($username)
     {
-        var_dump($this->all());
+        return $this->query("SELECT * FROM $this->table WHERE username = ?", [$username]);
     }
 }

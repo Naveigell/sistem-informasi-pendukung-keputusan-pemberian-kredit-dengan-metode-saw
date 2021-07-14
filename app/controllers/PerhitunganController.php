@@ -5,9 +5,17 @@ use System\Arrays\Collection;
 use System\Arrays\SimpleAdditiveWeighting;
 use App\Models\CriteriaModel;
 use App\Models\PerhitunganModel;
+use Dompdf\Dompdf;
 
 class PerhitunganController extends Controller {
 
+    protected $denyUnloggedUser = true;
+
+    /**
+     * If the key is empty, remove the key and value
+     *
+     * @param array $data
+     */
     private function removeNullOrEmptyValue(array &$data)
     {
         foreach ($data as $key => $value) {
@@ -17,6 +25,11 @@ class PerhitunganController extends Controller {
         }
     }
 
+    /**
+     * Remove numeric key and keep word key
+     *
+     * @param array $data
+     */
     private function removeNasabahNumericKey(array &$data)
     {
         foreach ($data as $key => $value) {
@@ -28,6 +41,27 @@ class PerhitunganController extends Controller {
         }
     }
 
+    /**
+     * Add data into nasabah which contains nasabah data
+     *
+     * @param array $data
+     */
+    private function addNasabahData(array &$data)
+    {
+        foreach ($data as $key => $value) {
+            foreach ($value as $k => $v) {
+                if (is_numeric($k)) {
+                    $data[$key]["data"] = $v;
+                }
+            }
+        }
+    }
+
+    /**
+     * Parse the periode from given url
+     *
+     * @return array
+     */
     private function parsePeriode()
     {
         $month = null;
@@ -45,7 +79,40 @@ class PerhitunganController extends Controller {
         ];
     }
 
-    public function index()
+    /**
+     * Generate pdf
+     */
+    public function generatePDF()
+    {
+        ob_start();
+        $dompPdf = new Dompdf();
+
+        $periode = $this->parsePeriode();
+        setlocale(LC_TIME, 'id_ID.utf-8');
+        $periode["month_name"] = strftime("%B", strtotime("1-".$periode["month"]."-".$periode["year"]));
+        $data = $this->calculateRanking()["ranking"];
+
+        view('perhitungan/perhitungan.pdf', [
+            "data"      => $data,
+            "periode"   => $periode
+        ]);
+
+        $html = ob_get_contents();
+        ob_get_clean();
+        $dompPdf->loadHtml($html);
+
+        $dompPdf->setPaper('A4', 'landscape');
+        $dompPdf->render();
+        $dompPdf->stream("usulan_calon_".uniqid());
+        exit();
+    }
+
+    /**
+     * Calculate ranking, nasabah name and criteria
+     *
+     * @return array
+     */
+    private function calculateRanking()
     {
         $periode = $this->parsePeriode();
 
@@ -98,6 +165,7 @@ class PerhitunganController extends Controller {
             }
         }
 
+        $this->addNasabahData($namaNasabah);
         $this->removeNasabahNumericKey($namaNasabah);
 
         $namaNasabahCollection = new Collection($namaNasabah);
@@ -153,12 +221,23 @@ class PerhitunganController extends Controller {
         // sort the ranking
         $ranking = (new Collection($namaNasabah))->sortByKey('result', Collection::SORT_DESC);
 
+        return [
+            "ranking"       => $ranking,
+            "namaNasabah"   => $namaNasabah,
+            "namaKriteria"  => $namaKriteria,
+        ];
+    }
+
+    public function index()
+    {
+        $data = $this->calculateRanking();
+
         view('includes/layout', [
             'content'       => "perhitungan/perhitungan.index",
-            'head'          => 5,
-            'namaKriteria'  => $namaKriteria,
-            'namaNasabah'   => $namaNasabah,
-            'ranking'       => $ranking,
+            'namaKriteria'  => $data["namaKriteria"],
+            'namaNasabah'   => $data["namaNasabah"],
+            'ranking'       => $data["ranking"],
+            'periode'       => isset($_GET["periode"]) && !empty($_GET["periode"]) ? $_GET["periode"] : ""
         ]);
     }
 }
