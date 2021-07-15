@@ -34,7 +34,7 @@
                                 <strong>Error!</strong> <?php echo flashGet('error'); ?>
                             </div>
                         <?php } ?>
-                        <form action="/nasabah/create" method="post" class="needs-validation" novalidate="">
+                        <form action="<?= BASE_PATH; ?>/nasabah/create" method="post" class="needs-validation" novalidate="">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-control-label" for="nama">Nama Nasabah</label>

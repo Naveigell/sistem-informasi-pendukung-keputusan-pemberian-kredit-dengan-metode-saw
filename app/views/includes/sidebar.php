@@ -22,20 +22,10 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-dashboards">
+                        <a class="nav-link" href="<?= BASE_PATH; ?>/">
                             <i class="ni ni-shop text-primary"></i>
-                            <span class="nav-link-text">Dashboards</span>
+                            <span class="nav-link-text">Dashboard</span>
                         </a>
-                        <div class="collapse show" id="navbar-dashboards">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="<?= BASE_PATH ?>" class="nav-link">
-                                        <span class="sidenav-mini-icon"> D </span>
-                                        <span class="sidenav-normal"> Dashboard </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= BASE_PATH; ?>/criteria">
@@ -53,6 +43,18 @@
                         <a class="nav-link" href="<?= BASE_PATH; ?>/perhitungan">
                             <i class="fa fa-cogs text-primary"></i>
                             <span class="nav-link-text">Perhitungan</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= BASE_PATH; ?>/ranking">
+                            <i class="fa fa-trophy text-dark"></i>
+                            <span class="nav-link-text">Ranking</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= BASE_PATH; ?>/laporan">
+                            <i class="fa fa-file text-yellow"></i>
+                            <span class="nav-link-text">Laporan</span>
                         </a>
                     </li>
                 </ul>

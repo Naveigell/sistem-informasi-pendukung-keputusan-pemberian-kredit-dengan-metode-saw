@@ -47,6 +47,7 @@ class LoginController extends Controller {
         if (count($user) > 0) {
             if (password_verify($request->password, $user[0]["password"])) {
                 $this->session->set("id", $user[0]["id_user"]);
+                $this->session->set("username", $user[0]["username"]);
                 redirect("/");
                 exit();
             } else {
@@ -61,5 +62,6 @@ class LoginController extends Controller {
     public function logout()
     {
         session_destroy();
+        redirect("/");
     }
 }

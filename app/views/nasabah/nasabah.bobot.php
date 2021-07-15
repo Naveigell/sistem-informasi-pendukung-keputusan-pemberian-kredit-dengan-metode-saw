@@ -43,7 +43,7 @@
                                 <strong>Error!</strong> <?php echo flashGet('error'); ?>
                             </div>
                         <?php } ?>
-                        <form action="/nasabah/bobot" method="post" class="needs-validation" novalidate="">
+                        <form action="<?= BASE_PATH; ?>/nasabah/bobot" method="post" class="needs-validation" novalidate="">
                             <input type="text" hidden name="id" value="<?= $_GET['id']; ?>">
                             <div class="row">
                                 <?php foreach ($grouped as $key => $value) { ?>

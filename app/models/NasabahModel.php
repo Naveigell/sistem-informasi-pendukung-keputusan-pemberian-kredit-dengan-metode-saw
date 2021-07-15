@@ -3,6 +3,7 @@ namespace App\Models;
 
 class NasabahModel extends Model {
     protected $table = 'cln_nasabah';
+    protected $primaryKey = 'id_cln_nsb';
 
     public function first($id)
     {

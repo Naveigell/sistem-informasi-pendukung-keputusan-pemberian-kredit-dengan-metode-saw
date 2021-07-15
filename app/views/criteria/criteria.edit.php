@@ -40,7 +40,7 @@
                                 <strong>Error!</strong> <?php echo flashGet('error'); ?>
                             </div>
                         <?php } ?>
-                        <form action="/criteria/update" method="post" class="needs-validation" novalidate="">
+                        <form action="<?= BASE_PATH; ?>/criteria/update" method="post" class="needs-validation" novalidate="">
                             <input type="text" hidden value="<?= $_GET['id'] ?>" name="id">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <hr>
-                        <form action="/criteria/update-sub-criteria" method="post" class="needs-validation" novalidate="">
+                        <form action="<?= BASE_PATH; ?>/criteria/update-sub-criteria" method="post" class="needs-validation" novalidate="">
                             <input type="text" hidden readonly name="id" value="<?= $_GET['id']; ?>">
                             <?php for ($i = 0; $i < count($subCriteria); $i++) { ?>
                                 <input type="text" hidden readonly name="id_subkriteria[]" value="<?= $subCriteria[$i]['id_subkriteria']; ?>">

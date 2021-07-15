@@ -18,9 +18,15 @@ $router->post('/nasabah/update', \App\Controllers\NasabahController::class, 'upd
 $router->post('/nasabah/delete', \App\Controllers\NasabahController::class, 'delete');
 
 $router->get('/perhitungan', \App\Controllers\PerhitunganController::class, 'index');
-$router->get('/perhitungan/pdf', \App\Controllers\PerhitunganController::class, 'generatePDF');
+
+//$router->get('/ranking/pdf', \App\Controllers\RankingController::class, 'generatePDF');
+$router->get('/ranking', \App\Controllers\RankingController::class, 'ranking');
+
+$router->get('/laporan', \App\Controllers\LaporanController::class, 'laporan');
+$router->get('/laporan/pdf', \App\Controllers\LaporanController::class, 'generatePDF');
 
 $router->get('/criteria', \App\Controllers\CriteriaController::class, 'index');
+$router->get('/criteria/sub-criteria', \App\Controllers\CriteriaController::class, 'createSubCriteria');
 $router->get('/criteria/edit', \App\Controllers\CriteriaController::class, 'edit');
 $router->get('/criteria/insert', \App\Controllers\CriteriaController::class, 'insert');
 $router->post('/criteria/create', \App\Controllers\CriteriaController::class, 'create');

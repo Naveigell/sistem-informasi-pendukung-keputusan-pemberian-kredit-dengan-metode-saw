@@ -4,6 +4,7 @@ namespace App\Models;
 
 class SubCriteriaModel extends Model {
     protected $table = 'sub_kriteria';
+    protected $primaryKey = 'id_subkriteria';
 
     public function selectWhereId($id)
     {

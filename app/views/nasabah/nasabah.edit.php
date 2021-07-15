@@ -40,7 +40,7 @@
                                 <strong>Error!</strong> <?php echo flashGet('error'); ?>
                             </div>
                         <?php } ?>
-                        <form action="/nasabah/update" method="post" class="needs-validation" novalidate="">
+                        <form action="<?= BASE_PATH; ?>/nasabah/update" method="post" class="needs-validation" novalidate="">
                             <input name="id" type="hidden" readonly value="<?= $_GET['id']; ?>">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">

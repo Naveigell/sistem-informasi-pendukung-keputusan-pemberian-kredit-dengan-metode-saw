@@ -86,6 +86,13 @@ class Model {
         return $query->rowCount();
     }
 
+    public function count()
+    {
+        $query = $this->connection->prepare("SELECT COUNT($this->primaryKey) AS _total FROM $this->table");
+        $query->execute();
+        return (int) $query->fetch()["_total"];
+    }
+
     public function update($data, $where)
     {
         $dataKeys = array_keys($data);

@@ -18,7 +18,7 @@ class Route {
     }
 
     private function callMethod($routes = []){
-        $url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        $url = parse_url(str_replace(BASE_PATH, "", $_SERVER["REQUEST_URI"]), PHP_URL_PATH);
         if (isset($routes[$url])) {
             $route = $routes[$url];
             if (method_exists($route[0], $route[1])) {

@@ -34,7 +34,7 @@
                                 <strong>Error!</strong> <?php echo flashGet('error'); ?>
                             </div>
                         <?php } ?>
-                        <form action="/criteria/create" method="post" class="needs-validation" novalidate="">
+                        <form action="<?= BASE_PATH; ?>/criteria/create" method="post" class="needs-validation" novalidate="">
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-control-label" for="name">Nama Kriteria</label>

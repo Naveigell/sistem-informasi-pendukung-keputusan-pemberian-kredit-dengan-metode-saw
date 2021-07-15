@@ -134,6 +134,19 @@ class CriteriaController extends Controller {
         }
     }
 
+    public function createSubCriteria()
+    {
+        $id = $this->request->getAllParams()->id;
+        $criteria       = new CriteriaModel();
+        $subCriteria    = new SubCriteriaModel();
+
+        view('includes/layout', [
+            'content'       => "criteria/criteria.add.sub-criteria",
+            'criteria'      => $criteria->selectWhereId($id),
+            'subCriteria'   => $subCriteria->selectWhereId($id),
+        ]);
+    }
+
     public function create()
     {
         $request    = $this->request->getAllData();
@@ -163,7 +176,7 @@ class CriteriaController extends Controller {
 
             if ($row > 0) {
                 $this->session->set('success', 'Tambah kriteria berhasil');
-                redirect('/criteria');
+                redirect('/criteria/sub-criteria?id='.$id);
             } else {
                 $this->session->set('error', 'Terjadi kesalahan saat menambah data');
                 redirect('/criteria/insert');

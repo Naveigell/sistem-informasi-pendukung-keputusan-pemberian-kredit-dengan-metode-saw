@@ -3,6 +3,7 @@
  * @var $content
  * @var $data
  * @var $fullscreen
+ * @var $grafik
  */
 ?>
 <!DOCTYPE html>
@@ -56,15 +57,72 @@
 <script src="<?php echo BASE_PATH; ?>/public/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
 <script src="<?php echo BASE_PATH; ?>/public/assets/vendor/chart.js/dist/Chart.min.js"></script>
-<script src="<?php echo BASE_PATH; ?>/public/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+<!--<script src="--><?php //echo BASE_PATH; ?><!--/public/assets/vendor/chart.js/dist/Chart.extension.js"></script>-->
 
-<script src="<?php echo BASE_PATH; ?>/public/assets/js/argon.min_v%3D1.2.1.js"></script>
+<script src="<?php echo BASE_PATH; ?>/public/assets/js/argon-1.2.1.js"></script>
 
 <script src="<?php echo BASE_PATH; ?>/public/assets/js/demo.min.js"></script>
 <script>
     $(document).ready(function () {
         $('.datatable-basic').DataTable();
-    })
+    });
+
+    <?php if (isset($grafik)) { ?>
+
+        const monthName = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        const graph = <?= json_encode($grafik) ?>;
+        const labels = graph.map(function (item) {
+            const date = new Date(item.periode);
+            return monthName[date.getMonth()] + " " + item._year;
+        });
+        const total = graph.map(function (item) {
+            return item._total;
+        });
+
+        let ctx = document.getElementById('nasabah-graph').getContext('2d');
+        let myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Total nasabah',
+                    data: total,
+                    backgroundColor: "#ffffff22",
+                    borderColor: "#ddd",
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: 'white'
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            userCallback: function(label, index, labels) {
+                                // when the floored value is the same as the value we have a whole number
+                                if (Math.floor(label) === label) {
+                                    return label;
+                                }
+
+                            },
+                            fontColor: "#fff",
+                        },
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "#fff",
+                        },
+                    }],
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+    <?php } ?>
 </script>
 </body>
 

@@ -3,16 +3,14 @@ namespace App\Controllers;
 
 use App\Helpers\SAW;
 
-class PerhitunganController extends Controller {
-
-    protected $denyUnloggedUser = true;
-
-    public function index()
+class RankingController extends Controller
+{
+    public function ranking()
     {
         $data = SAW::calculateRanking();
 
         view('includes/layout', [
-            'content'       => "perhitungan/perhitungan.index",
+            'content'       => "ranking/ranking.index",
             'namaKriteria'  => $data["namaKriteria"],
             'namaNasabah'   => $data["namaNasabah"],
             'ranking'       => $data["ranking"],
