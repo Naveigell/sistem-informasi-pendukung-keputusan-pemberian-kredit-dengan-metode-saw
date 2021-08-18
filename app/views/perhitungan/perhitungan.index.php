@@ -57,7 +57,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Perhitungan</h3>
+                    <h3 class="mb-0">Matriks Awal</h3>
                     <p class="text-sm mb-0">
                         Halaman ini adalah tampilan saat sistem melakukan perhitungan alternatif
                     </p>
@@ -72,7 +72,7 @@
                                         <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
                                             No
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Alternatif</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
                                         <?php foreach ($namaKriteria as $nama) { ?>
                                             <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nama; ?></th>
                                         <?php } ?>
@@ -81,7 +81,7 @@
                                     <tfoot>
                                     <tr>
                                         <th rowspan="1" colspan="1">No</th>
-                                        <th rowspan="1" colspan="1">Alternatif</th>
+                                        <th rowspan="1" colspan="1">Nama</th>
                                         <?php foreach ($namaKriteria as $nama) { ?>
                                             <th rowspan="1" colspan="1"><?= ucfirst($nama); ?></th>
                                         <?php } ?>
@@ -125,7 +125,7 @@
                                         <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
                                             No
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Alternatif</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
                                         <?php if (count($namaKriteria) > 0) { ?>
                                             <?php foreach ($namaKriteria as $nama) { ?>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nama; ?></th>
@@ -136,7 +136,7 @@
                                     <tfoot>
                                     <tr>
                                         <th rowspan="1" colspan="1">No</th>
-                                        <th rowspan="1" colspan="1">Alternatif</th>
+                                        <th rowspan="1" colspan="1">Nama</th>
                                         <?php if (count($namaKriteria) > 0) { ?>
                                             <?php foreach ($namaKriteria as $nama) { ?>
                                                 <th rowspan="1" colspan="1"><?= ucfirst($nama); ?></th>
@@ -184,15 +184,17 @@
                                         <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
                                             No
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Alternatif</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Total Nilai</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th rowspan="1" colspan="1">No</th>
-                                        <th rowspan="1" colspan="1">Alternatif</th>
+                                        <th rowspan="1" colspan="1">Nama</th>
                                         <th rowspan="1" colspan="1">Total Nilai</th>
+                                        <th rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -201,6 +203,7 @@
                                             <td class="sorting_1"><?= ++$i; ?></td>
                                             <td class="sorting_1"><?= $nasabah; ?></td>
                                             <td class="sorting_1"><?= $namaNasabah[$nasabah]['result']; ?></td>
+                                            <td class="sorting_1 text <?= $namaNasabah[$nasabah]['layak'] ? 'text-success' : 'text-danger' ?>"><?= $namaNasabah[$nasabah]['layak'] ? 'Layak' : 'Tidak Layak'; ?></td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>

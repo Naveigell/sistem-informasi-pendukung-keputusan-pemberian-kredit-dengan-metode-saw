@@ -38,6 +38,12 @@ class NasabahController extends Controller {
         ]);
     }
 
+    public function detail()
+    {
+        $nasabah = (new NasabahModel())->first($_GET['id']);
+        echo json_encode($nasabah);
+    }
+
     public function bobot()
     {
         $criteria = new CriteriaModel();
@@ -193,7 +199,7 @@ class NasabahController extends Controller {
             $periode        = $request->periode;
 
             $model = new NasabahModel();
-            $row = $model->insert([
+            $id = $model->insert([
                 "nama_nsb"              => $nama,
                 "no_kk"                 => $noKK,
                 "no_nik"                => $nik,
@@ -205,11 +211,11 @@ class NasabahController extends Controller {
                 "no_tlp"                => $noTelepon,
                 "jenis_kelamin"         => $jenisKelamin,
                 "periode"               => date("Y-m-d", strtotime($periode)),
-            ]);
+            ], true);
 
-            if ($row > 0) {
+            if ($id > 0) {
                 $this->session->set('success', 'Tambah nasabah berhasil');
-                redirect('/nasabah');
+                redirect('/nasabah/bobot?id='.$id);
             } else {
                 $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
                 redirect('/nasabah/insert');

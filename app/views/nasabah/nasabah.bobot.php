@@ -47,7 +47,7 @@
                             <input type="text" hidden name="id" value="<?= $_GET['id']; ?>">
                             <div class="row">
                                 <?php foreach ($grouped as $key => $value) { ?>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-4 mb-4">
                                         <input type="text" name="kriteria[]" hidden value="<?= $value[0]['id_kriteria']; ?>">
                                         <label class="form-control-label" for="sub_kriteria"><?= ucfirst($key); ?></label>
                                         <select class="form-control" name="sub_kriteria[]" id="sub_kriteria">

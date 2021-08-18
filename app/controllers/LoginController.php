@@ -48,6 +48,7 @@ class LoginController extends Controller {
             if (password_verify($request->password, $user[0]["password"])) {
                 $this->session->set("id", $user[0]["id_user"]);
                 $this->session->set("username", $user[0]["username"]);
+                $this->session->set("role", $user[0]["role"]);
                 redirect("/");
                 exit();
             } else {

@@ -56,6 +56,7 @@
                 <th>Jenis Kelamin</th>
                 <th>No Telp</th>
                 <th>Agama</th>
+                <th>Keterangan</th>
             </tr>
             </thead>
             <tbody>
@@ -69,6 +70,7 @@
                     <td><?= $value["data"]["jenis_kelamin"]; ?></td>
                     <td><?= $value["data"]["no_tlp"]; ?></td>
                     <td><?= $value["data"]["agama"]; ?></td>
+                    <td><?= $value["layak"] ? "<b>Layak</b>": "Tidak Layak"; ?></td>
                 </tr>
             <?php } ?>
             </tbody>

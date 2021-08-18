@@ -57,7 +57,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Nilai Hasil</h3>
+                    <h3 class="mb-0">Perangkingan</h3>
                     <p class="text-sm mb-0">
                         Halaman ini adalah tampilan saat sistem melakukan perangkingan
                     </p>
@@ -76,6 +76,7 @@
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">NIK</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nilai</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Ranking</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
@@ -85,6 +86,7 @@
                                         <th rowspan="1" colspan="1">NIK</th>
                                         <th rowspan="1" colspan="1">Nilai</th>
                                         <th rowspan="1" colspan="1">Ranking</th>
+                                        <th rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -95,6 +97,7 @@
                                             <td class="sorting_1"><?= $namaNasabah[$nasabah]['data']["no_nik"]; ?></td>
                                             <td class="sorting_1"><?= $namaNasabah[$nasabah]['result']; ?></td>
                                             <td class="sorting_1"><?= $i; ?></td>
+                                            <td class="sorting_1 text <?= $namaNasabah[$nasabah]['layak'] ? 'text-success' : 'text-danger' ?>"><?= $namaNasabah[$nasabah]['layak'] ? 'Layak' : 'Tidak Layak'; ?></td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>

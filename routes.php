@@ -12,6 +12,7 @@ $router->get('/nasabah', \App\Controllers\NasabahController::class, 'index');
 $router->get('/nasabah/insert', \App\Controllers\NasabahController::class, 'insert');
 $router->get('/nasabah/bobot', \App\Controllers\NasabahController::class, 'bobot');
 $router->get('/nasabah/edit', \App\Controllers\NasabahController::class, 'edit');
+$router->get('/nasabah/detail', \App\Controllers\NasabahController::class, 'detail');
 $router->post('/nasabah/bobot', \App\Controllers\NasabahController::class, 'updateBobot');
 $router->post('/nasabah/create', \App\Controllers\NasabahController::class, 'create');
 $router->post('/nasabah/update', \App\Controllers\NasabahController::class, 'update');
@@ -19,11 +20,11 @@ $router->post('/nasabah/delete', \App\Controllers\NasabahController::class, 'del
 
 $router->get('/perhitungan', \App\Controllers\PerhitunganController::class, 'index');
 
-//$router->get('/ranking/pdf', \App\Controllers\RankingController::class, 'generatePDF');
 $router->get('/ranking', \App\Controllers\RankingController::class, 'ranking');
 
 $router->get('/laporan', \App\Controllers\LaporanController::class, 'laporan');
 $router->get('/laporan/pdf', \App\Controllers\LaporanController::class, 'generatePDF');
+
 
 $router->get('/criteria', \App\Controllers\CriteriaController::class, 'index');
 $router->get('/criteria/sub-criteria', \App\Controllers\CriteriaController::class, 'createSubCriteria');

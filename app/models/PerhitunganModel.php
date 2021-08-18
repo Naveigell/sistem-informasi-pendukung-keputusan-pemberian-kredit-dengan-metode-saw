@@ -16,4 +16,6 @@ class PerhitunganModel extends Model {
                 LEFT JOIN sub_kriteria ON sub_kriteria.id_subkriteria = pengajuan.id_subkriteria".$where
         );
     }
+
+
 }

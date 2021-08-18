@@ -12,17 +12,27 @@ class DashboardController extends Controller {
 
     public function index()
     {
-        $nasabah        = new NasabahModel();
-        $kriteria       = new CriteriaModel();
-        $subKriteria    = new SubCriteriaModel();
-        $graph          = new DashboardModel();
+        if (sessionHas("role")) {
+            if (sessionGet("role") == "admin") {
+                $nasabah        = new NasabahModel();
+                $kriteria       = new CriteriaModel();
+                $subKriteria    = new SubCriteriaModel();
+                $graph          = new DashboardModel();
 
-        view('includes/layout', [
-            "content"       => "dashboard",
-            "nasabah"       => $nasabah->count(),
-            "kriteria"      => $kriteria->count(),
-            "sub_kriteria"  => $subKriteria->count(),
-            "grafik"        => $graph->graph(),
-        ]);
+                view('includes/layout', [
+                    "content"       => "dashboard_admin",
+                    "nasabah"       => $nasabah->count(),
+                    "kriteria"      => $kriteria->count(),
+                    "sub_kriteria"  => $subKriteria->count(),
+                    "grafik"        => $graph->graph(),
+                ]);
+            } else {
+                view('includes/layout', [
+                    "content"       => "dashboard_kepala_lpd"
+                ]);
+            }
+        } else {
+            abort404();
+        }
     }
 }

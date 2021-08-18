@@ -88,6 +88,7 @@
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Alamat</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">No Tlp</th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Agama</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
@@ -99,6 +100,7 @@
                                         <th rowspan="1" colspan="1">Alamat</th>
                                         <th rowspan="1" colspan="1">No Tlp</th>
                                         <th rowspan="1" colspan="1">Agama</th>
+                                        <th rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -111,6 +113,7 @@
                                             <td class="sorting_1"><?= $namaNasabah[$nasabah]['data']["alamat"]; ?></td>
                                             <td class="sorting_1"><?= $namaNasabah[$nasabah]['data']["no_tlp"]; ?></td>
                                             <td class="sorting_1"><?= $namaNasabah[$nasabah]['data']["agama"]; ?></td>
+                                            <td class="sorting_1 text <?= $namaNasabah[$nasabah]['layak'] ? 'text-success' : 'text-danger' ?>"><?= $namaNasabah[$nasabah]['layak'] ? 'Layak' : 'Tidak Layak'; ?></td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>

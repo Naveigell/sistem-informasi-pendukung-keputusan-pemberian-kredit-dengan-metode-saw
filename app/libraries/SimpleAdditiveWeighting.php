@@ -103,12 +103,12 @@ class SimpleAdditiveWeighting {
             if ($items['criteria'] === self::CRITERIA_BENEFIT) {
                 $point = max($items['data']);
                 foreach ($items['data'] as $item) {
-                    array_push($values, round($item / $point, 3));
+                    array_push($values, round($item / $point, 2));
                 }
             } else if ($items['criteria'] === self::CRITERIA_COST) {
                 $point = min($items['data']);
                 foreach ($items['data'] as $item) {
-                    array_push($values, round($point / $item, 3));
+                    array_push($values, round($point / $item, 2));
                 }
             }
 

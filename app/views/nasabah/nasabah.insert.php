@@ -63,16 +63,14 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label class="form-control-label" for="tempat_lahir">Tempat Lahir</label>
                                     <input name="tempat_lahir" type="text" class="form-control <?= flashHas('error-tempat_lahir') ? 'is-invalid' : ''; ?>" id="tempat_lahir" placeholder="Masukkan tempat lahir ...">
                                     <div class="invalid-feedback">
                                         <?= flashGet('error-tempat_lahir')[0] ?>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-12 mb-3">
+                                <div class="col-md-6 mb-3">
                                     <label class="form-control-label" for="tanggal_lahir">Tanggal Lahir</label>
                                     <input name="tanggal_lahir" type="date" class="form-control <?= flashHas('error-tanggal_lahir') ? 'is-invalid' : ''; ?>" id="tanggal_lahir" placeholder="Masukkan tanggal lahir ...">
                                     <div class="invalid-feedback">

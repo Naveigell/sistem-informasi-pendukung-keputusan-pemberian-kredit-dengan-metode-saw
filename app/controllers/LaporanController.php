@@ -31,10 +31,10 @@ class LaporanController extends Controller
         $periode = SAW::parsePeriode();
         setlocale(LC_TIME, 'id_ID.utf-8');
         $periode["month_name"] = strftime("%B", strtotime("1-".$periode["month"]."-".$periode["year"]));
-        $data = SAW::calculateRanking()["ranking"];
+        $data = SAW::calculateRanking();
 
         view('laporan/laporan.pdf', [
-            "data"      => $data,
+            "data"      => $data["ranking"],
             "periode"   => $periode
         ]);
 

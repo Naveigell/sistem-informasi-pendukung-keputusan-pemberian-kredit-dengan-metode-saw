@@ -3,11 +3,14 @@ namespace App\Helpers;
 
 use App\Models\CriteriaModel;
 use App\Models\PerhitunganModel;
+use App\Models\SawModel;
 use System\Arrays\Collection;
 use System\Arrays\SimpleAdditiveWeighting;
 
 class SAW
 {
+    const ELIGIBILITY_MARGIN = 41.25;
+
     /**
      * If the key is empty, remove the key and value
      *
@@ -86,6 +89,31 @@ class SAW
         return $quota;
     }
 
+    private static function calculateEligibility()
+    {
+//        $config = [
+//            "Pendapatan"            => 2,
+//            "Pekerjaan"             => 2,
+//            "Jaminan"               => 2,
+//            "Pengeluaran"           => 4,
+//            "Usia"                  => 1,
+//            "Jangka waktu"          => 1
+//        ];
+//
+//        $saw = new SawModel();
+//        $eligibilities = $saw->calculateEligibility($config);
+//        SimpleAdditiveWeighting::clear();
+//
+//        foreach ($eligibilities as $eligibility) {
+//            SimpleAdditiveWeighting::addData([$eligibility["value"]], $eligibility["bobot"], strtoupper($eligibility["ket_kriteria"]));
+//        }
+//
+//        SimpleAdditiveWeighting::normalize();
+//        SimpleAdditiveWeighting::calculate();
+//
+//        return SimpleAdditiveWeighting::data();
+    }
+
     /**
      * Calculate ranking, nasabah name and criteria
      *
@@ -111,7 +139,7 @@ class SAW
         $namaNasabah = $nasabahCollection->groupBy('nama_nsb');
 
         foreach ($namaNasabah as $key => $value) {
-            $collection = new Collection($namaNasabah[$key]);
+            $collection = new Collection($value);
             $nilai      = $collection->pluck('nilai');
             $nama       = $collection->pluck('nama_kriteria');
             $namaNasabah[$key]['nilai_fields'] = (is_null($nilai) ? 1 : $nilai);
@@ -189,7 +217,10 @@ class SAW
         $i = 0;
         // add the result into nasabah
         foreach ($namaNasabah as $key => $value) {
-            $namaNasabah[$key]['result'] = is_null($result) || count($result) <= 0 ? 0 : $result[$i++];
+            // $r is result
+            $r = is_null($result) || count($result) <= 0 ? 0 : $result[$i++];
+            $namaNasabah[$key]['result'] = $r;
+            $namaNasabah[$key]['layak'] = $r >= self::ELIGIBILITY_MARGIN;
         }
 
         // remove unused array in nasabah
