@@ -1,10 +1,12 @@
 <?php
 namespace App\Controllers;
 
+use App\Helpers\SAW;
 use App\Models\CriteriaModel;
 use App\Models\DashboardModel;
 use App\Models\NasabahModel;
 use App\Models\SubCriteriaModel;
+use System\Arrays\Collection;
 
 class DashboardController extends Controller {
 
@@ -12,27 +14,40 @@ class DashboardController extends Controller {
 
     public function index()
     {
-        if (sessionHas("role")) {
-            if (sessionGet("role") == "admin") {
-                $nasabah        = new NasabahModel();
-                $kriteria       = new CriteriaModel();
-                $subKriteria    = new SubCriteriaModel();
-                $graph          = new DashboardModel();
+        $nasabah        = new NasabahModel();
+        $kriteria       = new CriteriaModel();
+        $subKriteria    = new SubCriteriaModel();
+        $model          = new DashboardModel();
 
-                view('includes/layout', [
-                    "content"       => "dashboard_admin",
-                    "nasabah"       => $nasabah->count(),
-                    "kriteria"      => $kriteria->count(),
-                    "sub_kriteria"  => $subKriteria->count(),
-                    "grafik"        => $graph->graph(),
-                ]);
-            } else {
-                view('includes/layout', [
-                    "content"       => "dashboard_kepala_lpd"
-                ]);
-            }
-        } else {
-            abort404();
-        }
+        $data           = SAW::calculateRanking();
+        $filtered       = array_filter($data["namaNasabah"], function ($nasabah) {
+            return $nasabah["layak"];
+        });
+
+        $ids            = array_map(function ($item) {
+            return $item["id"];
+        }, $filtered);
+
+        $criteriaGraph = $model->criteriaGraph(array_values($ids));
+        $criteriaCollection = (new Collection($criteriaGraph))->groupBy('nama_kriteria');
+
+        $professionCount = (new Collection($criteriaCollection["Pekerjaan"]))->countKey('ket');
+        $timePeriodCount = (new Collection($criteriaCollection["Jangka waktu"]))->countKey('ket');
+
+        $profession = (new Collection($professionCount))->setDefault(['Pedagang', 'PNS', 'Wiraswasta', 'Tidak Tetap'], 0);
+        $timePeriod = (new Collection($timePeriodCount))->setDefault(['>36 bulan', '≥24 bulan - < 36 bulan', '≥12 bulan - < 24 bulan', '< 12 bln'], 0);
+
+        asort($profession);
+        asort($timePeriod);
+
+        view('includes/layout', [
+            "content"       => sessionGet("role") == "admin" ? "dashboard_admin" : "dashboard_kepala_lpd",
+            "nasabah"       => $nasabah->count(),
+            "kriteria"      => $kriteria->count(),
+            "sub_kriteria"  => $subKriteria->count(),
+            "grafik"        => $model->graph(),
+            "profesi"       => array_values($profession),
+            "time_period"   => array_values($timePeriod)
+        ]);
     }
 }

@@ -4,7 +4,7 @@
  * @var $subCriteria
  */
 ?>
-<div class="header bg-primary pb-6">
+<div class="header bg-success pb-6">
     <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center py-4">
@@ -55,7 +55,7 @@
                                 <div class="col-md-12 mb-3">
                                     <label class="form-control-label d-block" for="name">Keterangan Kriteria</label>
                                     <div class="custom-control custom-radio mb-3 d-inline-block">
-                                        <input value="Cost" <?= $criteria[0]['ket_kriteria'] == 'Cost' ? 'checked' : '' ?> name="property" class="custom-control-input" id="customRadio5" type="radio">
+                                        <input value="Cost" <?= $criteria[0]['ket_kriteria'] == 'Cost' ? 'checked' : '' ?> name="property" class="custom-control-input " id="customRadio5" type="radio">
                                         <label class="custom-control-label" for="customRadio5">Cost</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-3 d-inline-block ml-3">
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
+                            <button class="btn btn-success btn-sm" type="submit">Simpan</button>
                         </form>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                                     </div>
                                 </div>
                             <?php } ?>
-                            <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
+                            <button class="btn btn-success btn-sm" type="submit">Simpan</button>
                         </form>
                     </div>
                 </div>

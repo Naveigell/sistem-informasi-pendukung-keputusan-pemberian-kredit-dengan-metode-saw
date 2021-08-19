@@ -3,7 +3,7 @@
  * @var $criteria
  */
 ?>
-<div class="header bg-primary pb-6">
+<div class="header bg-success pb-6">
     <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center py-4">
@@ -23,7 +23,7 @@
                     <p class="text-sm mb-0">
                         Halaman ini adalah tampilan dari semua kriteria yang terdaftar di sistem
                     </p>
-                    <a href="<?= BASE_PATH; ?>/criteria/insert" class="btn btn-primary btn-sm mt-3" style="color: white;"><i class="fa fa-plus"></i>&nbsp;Tambah kriteria</a>
+                    <a href="<?= BASE_PATH; ?>/criteria/insert" class="btn btn-success btn-sm mt-3" style="color: white;"><i class="fa fa-plus"></i>&nbsp;Tambah kriteria</a>
                 </div>
                 <div class="card-body">
                     <?php if (flashHas('success')) { ?>

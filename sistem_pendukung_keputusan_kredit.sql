@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2021 at 03:54 PM
+-- Generation Time: Aug 19, 2021 at 03:13 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -137,13 +137,7 @@ INSERT INTO `pengajuan` (`id_pengajuan`, `id_kriteria`, `id_cln_nsb`, `id_subkri
 (224, 42, 11, 254),
 (225, 43, 11, 257),
 (226, 44, 11, 262),
-(227, 45, 11, 267),
-(228, 40, 16, 245),
-(229, 41, 16, 249),
-(230, 42, 16, 253),
-(231, 43, 16, 259),
-(232, 44, 16, 265),
-(233, 45, 16, 269);
+(227, 45, 11, 267);
 
 -- --------------------------------------------------------
 
@@ -192,12 +186,7 @@ INSERT INTO `sub_kriteria` (`id_subkriteria`, `id_kriteria`, `ket`, `nilai`) VAL
 (268, 45, '≥24 bulan - < 36 bulan', 3),
 (269, 45, '≥12 bulan - < 24 bulan', 2),
 (270, 45, '< 12 bln', 1),
-(271, 45, '', 0),
-(272, 46, 'test 1', 1),
-(273, 46, 'test 2', 1),
-(274, 46, 'test 3', 1),
-(275, 46, 'test 4', 1),
-(276, 46, 'test 5', 1);
+(271, 45, '', 0);
 
 -- --------------------------------------------------------
 
@@ -246,13 +235,17 @@ ALTER TABLE `kriteria`
 -- Indexes for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  ADD PRIMARY KEY (`id_pengajuan`);
+  ADD PRIMARY KEY (`id_pengajuan`),
+  ADD KEY `id_kriteria` (`id_kriteria`),
+  ADD KEY `id_subkriteria` (`id_subkriteria`),
+  ADD KEY `id_cln_nsb` (`id_cln_nsb`);
 
 --
 -- Indexes for table `sub_kriteria`
 --
 ALTER TABLE `sub_kriteria`
-  ADD PRIMARY KEY (`id_subkriteria`);
+  ADD PRIMARY KEY (`id_subkriteria`),
+  ADD KEY `id_kriteria` (`id_kriteria`);
 
 --
 -- Indexes for table `user`
@@ -293,6 +286,24 @@ ALTER TABLE `sub_kriteria`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `pengajuan`
+--
+ALTER TABLE `pengajuan`
+  ADD CONSTRAINT `pengajuan_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pengajuan_ibfk_2` FOREIGN KEY (`id_subkriteria`) REFERENCES `sub_kriteria` (`id_subkriteria`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pengajuan_ibfk_3` FOREIGN KEY (`id_cln_nsb`) REFERENCES `cln_nasabah` (`id_cln_nsb`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sub_kriteria`
+--
+ALTER TABLE `sub_kriteria`
+  ADD CONSTRAINT `sub_kriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

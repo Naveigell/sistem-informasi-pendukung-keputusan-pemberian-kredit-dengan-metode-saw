@@ -1,4 +1,4 @@
-<div class="header bg-primary pb-6">
+<div class="header bg-success pb-6">
     <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center py-4">
@@ -140,7 +140,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-sm" type="submit">Simpan</button>
+                            <button class="btn btn-success btn-sm" type="submit">Simpan</button>
                         </form>
                     </div>
                 </div>

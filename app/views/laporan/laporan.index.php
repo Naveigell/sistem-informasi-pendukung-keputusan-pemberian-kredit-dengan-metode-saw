@@ -10,7 +10,7 @@
  * @var $kuota
  */
 ?>
-<div class="header bg-primary pb-6">
+<div class="header bg-success pb-6">
     <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center py-4">
@@ -48,7 +48,7 @@
                                     <input value="<?= $_GET["kuota"]; ?>" name="kuota" class="form-control" placeholder="Kuota penerima ..." type="number">
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary btn-sm mt-2" type="submit">
+                                    <button class="btn btn-success btn-sm mt-2" type="submit">
                                         Pilih
                                     </button>
                                     <a href="<?= BASE_PATH; ?>/laporan" class="btn btn-info btn-sm mt-2" type="submit">

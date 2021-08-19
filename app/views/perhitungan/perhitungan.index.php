@@ -9,7 +9,7 @@
  * @var $periode
  */
 ?>
-<div class="header bg-primary pb-6">
+<div class="header bg-success pb-6">
     <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center py-4">
@@ -40,7 +40,7 @@
                                     </div>
                                     <input value="<?= isset($_GET["periode"]) && !empty($_GET["periode"]) ? date("Y-m", strtotime($_GET['periode'])) : ''; ?>" name="periode" class="form-control" placeholder="Periode ..." type="month">
                                 </div>
-                                <button class="btn btn-primary btn-sm mt-2" type="submit">
+                                <button class="btn btn-success btn-sm mt-2" type="submit">
                                     Pilih
                                 </button>
                                 <a href="<?= BASE_PATH; ?>/perhitungan" class="btn btn-info btn-sm mt-2" type="submit">

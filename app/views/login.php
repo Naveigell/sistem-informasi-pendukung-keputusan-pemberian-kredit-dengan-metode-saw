@@ -1,6 +1,5 @@
 <div class="main-content" style="position: relative; height: 100vh; display: flex; justify-content: center; align-items: center;">
-     Header
-    <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9" style="top: 0; bottom: 0; left: 0; right: 0; position: fixed;">
+    <div class="header py-7 py-lg-8 pt-lg-9" style="top: 0; bottom: 0; left: 0; right: 0; position: fixed; background: rgb(75, 192, 192);">
         <div class="separator separator-bottom separator-skew zindex-100">
             <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
@@ -58,7 +57,7 @@
                                 </label>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary my-4">Sign in</button>
+                                <button type="submit" class="btn btn-primary my-4" style="background: #000080; border-color: #000080;">Sign in</button>
                             </div>
                         </form>
                     </div>

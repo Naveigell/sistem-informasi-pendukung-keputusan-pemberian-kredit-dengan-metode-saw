@@ -66,63 +66,6 @@
     $(document).ready(function () {
         $('.datatable-basic').DataTable();
     });
-
-    <?php if (isset($grafik)) { ?>
-
-        const monthName = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-        const graph = <?= json_encode($grafik) ?>;
-        const labels = graph.map(function (item) {
-            const date = new Date(item.periode);
-            return monthName[date.getMonth()] + " " + item._year;
-        });
-        const total = graph.map(function (item) {
-            return item._total;
-        });
-
-        let ctx = document.getElementById('nasabah-graph').getContext('2d');
-        let myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels,
-                datasets: [{
-                    label: 'Total nasabah',
-                    data: total,
-                    backgroundColor: "#ffffff22",
-                    borderColor: "#ddd",
-                    borderWidth: 2,
-                }]
-            },
-            options: {
-                legend: {
-                    labels: {
-                        fontColor: 'white'
-                    }
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            userCallback: function(label, index, labels) {
-                                // when the floored value is the same as the value we have a whole number
-                                if (Math.floor(label) === label) {
-                                    return label;
-                                }
-
-                            },
-                            fontColor: "#fff",
-                        },
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            fontColor: "#fff",
-                        },
-                    }],
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-            }
-        });
-    <?php } ?>
 </script>
 </body>
 

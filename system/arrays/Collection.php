@@ -11,16 +11,38 @@ class Collection {
         $this->collections = $array;
     }
 
+    public function countKey($key = '')
+    {
+        $arr = [];
+        foreach ($this->collections as $collection) {
+            if (!isset($arr[$collection[$key]])) {
+                $arr[$collection[$key]] = 0;
+            }
+            $arr[$collection[$key]]++;
+        }
+
+        return $arr;
+    }
+
+    public function setDefault(array $array, $default)
+    {
+        foreach ($array as $item) {
+            if (!array_key_exists($item, $this->collections)) {
+                $this->collections[$item] = $default;
+            }
+        }
+
+        return $this->collections;
+    }
+
     public function groupBy($key = '')
     {
         $arr = [];
         foreach ($this->collections as $collection) {
-            if (isset($arr[$collection[$key]])) {
-                array_push($arr[$collection[$key]], $collection);
-            } else {
+            if (!isset($arr[$collection[$key]])) {
                 $arr[$collection[$key]] = [];
-                array_push($arr[$collection[$key]], $collection);
             }
+            array_push($arr[$collection[$key]], $collection);
         }
 
         return $arr;
