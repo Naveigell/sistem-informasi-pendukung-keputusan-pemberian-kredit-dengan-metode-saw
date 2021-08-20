@@ -25,7 +25,6 @@ $router->get('/ranking', \App\Controllers\RankingController::class, 'ranking');
 $router->get('/laporan', \App\Controllers\LaporanController::class, 'laporan');
 $router->get('/laporan/pdf', \App\Controllers\LaporanController::class, 'generatePDF');
 
-
 $router->get('/criteria', \App\Controllers\CriteriaController::class, 'index');
 $router->get('/criteria/sub-criteria', \App\Controllers\CriteriaController::class, 'createSubCriteria');
 $router->get('/criteria/edit', \App\Controllers\CriteriaController::class, 'edit');

@@ -1,5 +1,5 @@
 <?php
-namespace System\Arrays;
+namespace App\Libraries;
 
 class SimpleAdditiveWeighting {
     private static $data = [];

@@ -159,6 +159,22 @@
             }]
         },
         options: {
+            tooltips: {
+                mode: 'label',
+                callbacks: {
+                    label: function(item, data) {
+                        const index = item.index;
+                        const value = data.datasets[0].data[index];
+                        const label = data.labels[index];
+
+                        const total = data.datasets[0].data.reduce(function (total, current) {
+                            return total + current;
+                        }, 0);
+
+                        return  label + " : " + (value / total) + " %";
+                    }
+                }
+            },
             legend: {
                 labels: {
                     fontColor: 'white'
@@ -167,20 +183,12 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true,
-                        userCallback: function(label, index, labels) {
-                            // when the floored value is the same as the value we have a whole number
-                            if (Math.floor(label) === label) {
-                                return label;
-                            }
-
-                        },
-                        fontColor: "#fff",
+                        display: false
                     },
                 }],
                 xAxes: [{
                     ticks: {
-                        fontColor: "#fff",
+                        display: false
                     },
                 }],
             },
@@ -209,28 +217,34 @@
             }]
         },
         options: {
-            legend: {
-                labels: {
-                    fontColor: 'white'
+            tooltips: {
+                mode: 'label',
+                callbacks: {
+                    label: function(item, data) {
+                        const index = item.index;
+                        const value = data.datasets[0].data[index];
+                        const label = data.labels[index];
+
+                        const total = data.datasets[0].data.reduce(function (total, current) {
+                            return total + current;
+                        }, 0);
+
+                        return  label + " : " + (value / total) + " %";
+                    }
                 }
+            },
+            legend: {
+                display: false
             },
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true,
-                        userCallback: function(label, index, labels) {
-                            // when the floored value is the same as the value we have a whole number
-                            if (Math.floor(label) === label) {
-                                return label;
-                            }
-
-                        },
-                        fontColor: "#fff",
+                        display: false
                     },
                 }],
                 xAxes: [{
                     ticks: {
-                        fontColor: "#fff",
+                        display: false
                     },
                 }],
             },

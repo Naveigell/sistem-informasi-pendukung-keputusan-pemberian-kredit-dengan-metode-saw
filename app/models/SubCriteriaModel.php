@@ -11,6 +11,13 @@ class SubCriteriaModel extends Model {
         return $this->query("SELECT * FROM $this->table WHERE id_kriteria=?", [$id]);
     }
 
+    public function countWhereNotEmpty()
+    {
+        $query = $this->connection->prepare("SELECT COUNT($this->primaryKey) AS _total FROM $this->table WHERE ket != ''");
+        $query->execute();
+        return (int) $query->fetch()["_total"];
+    }
+
     public function insertSubCriteria($idKriteria, $count = 5)
     {
         $sql = "INSERT INTO sub_kriteria(id_kriteria, ket, nilai) VALUES";

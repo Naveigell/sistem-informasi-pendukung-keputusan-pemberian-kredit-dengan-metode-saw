@@ -1,11 +1,10 @@
 <?php
 namespace App\Helpers;
 
+use App\Libraries\SimpleAdditiveWeighting;
 use App\Models\CriteriaModel;
 use App\Models\PerhitunganModel;
-use App\Models\SawModel;
 use System\Arrays\Collection;
-use System\Arrays\SimpleAdditiveWeighting;
 
 class SAW
 {
@@ -87,31 +86,6 @@ class SAW
         }
 
         return $quota;
-    }
-
-    private static function calculateEligibility()
-    {
-//        $config = [
-//            "Pendapatan"            => 2,
-//            "Pekerjaan"             => 2,
-//            "Jaminan"               => 2,
-//            "Pengeluaran"           => 4,
-//            "Usia"                  => 1,
-//            "Jangka waktu"          => 1
-//        ];
-//
-//        $saw = new SawModel();
-//        $eligibilities = $saw->calculateEligibility($config);
-//        SimpleAdditiveWeighting::clear();
-//
-//        foreach ($eligibilities as $eligibility) {
-//            SimpleAdditiveWeighting::addData([$eligibility["value"]], $eligibility["bobot"], strtoupper($eligibility["ket_kriteria"]));
-//        }
-//
-//        SimpleAdditiveWeighting::normalize();
-//        SimpleAdditiveWeighting::calculate();
-//
-//        return SimpleAdditiveWeighting::data();
     }
 
     /**

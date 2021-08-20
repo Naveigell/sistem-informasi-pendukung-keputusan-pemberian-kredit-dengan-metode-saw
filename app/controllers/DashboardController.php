@@ -44,7 +44,7 @@ class DashboardController extends Controller {
             "content"       => sessionGet("role") == "admin" ? "dashboard_admin" : "dashboard_kepala_lpd",
             "nasabah"       => $nasabah->count(),
             "kriteria"      => $kriteria->count(),
-            "sub_kriteria"  => $subKriteria->count(),
+            "sub_kriteria"  => $subKriteria->countWhereNotEmpty(),
             "grafik"        => $model->graph(),
             "profesi"       => array_values($profession),
             "time_period"   => array_values($timePeriod)
