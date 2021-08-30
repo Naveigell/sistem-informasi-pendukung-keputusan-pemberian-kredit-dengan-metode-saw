@@ -63,16 +63,19 @@ class SAW
      */
     public static function parsePeriode()
     {
+        $date = null;
         $month = null;
         $year = null;
 
         if (isset($_GET["periode"]) && !empty($_GET["periode"])) {
             $periode = explode("-", $_GET["periode"]);
-            $month = $periode[1];
             $year = $periode[0];
+            $month = $periode[1];
+            $date = $periode[2];
         }
 
         return [
+            "date"  => $date,
             "month" => $month,
             "year"  => $year
         ];
@@ -99,7 +102,7 @@ class SAW
         $quota = self::parseKuota();
 
         $model = new PerhitunganModel();
-        $nasabah = $model->getAll($periode["month"], $periode["year"]);
+        $nasabah = $model->getAll($periode["date"], $periode["month"], $periode["year"]);
         $nasabahCollection = new Collection($nasabah);
 
         $namaKriteria       = new CriteriaModel();

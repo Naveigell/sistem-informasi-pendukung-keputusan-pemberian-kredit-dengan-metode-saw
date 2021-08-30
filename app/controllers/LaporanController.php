@@ -38,13 +38,13 @@ class LaporanController extends Controller
             "periode"   => $periode
         ]);
 
-        $html = ob_get_contents();
-        ob_get_clean();
-        $dompPdf->loadHtml($html);
+       $html = ob_get_contents();
+       ob_get_clean();
+       $dompPdf->loadHtml($html);
 
-        $dompPdf->setPaper('A4', 'landscape');
-        $dompPdf->render();
-        $dompPdf->stream("usulan_calon_".uniqid());
-        exit();
+       $dompPdf->setPaper('f4', 'landscape');
+       $dompPdf->render();
+       $dompPdf->stream("usulan_calon_".uniqid());
+       exit();
     }
 }

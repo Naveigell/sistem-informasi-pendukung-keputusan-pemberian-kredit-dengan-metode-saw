@@ -2,11 +2,11 @@
 namespace App\Models;
 
 class PerhitunganModel extends Model {
-    public function getAll($month = null, $year = null)
+    public function getAll($date = null, $month = null, $year = null)
     {
         $where = "";
-        if (!is_null($month) && !is_null($year)) {
-            $where = " WHERE MONTH(periode) = $month AND YEAR(periode) = $year";
+        if (!is_null($date) && !is_null($month) && !is_null($year)) {
+            $where = " WHERE MONTH(periode) = $month AND YEAR(periode) = $year AND CONVERT(DATE_FORMAT(periode,'%d'), INT) = $date";
         }
 
         return $this->query(

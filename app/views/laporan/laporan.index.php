@@ -35,17 +35,11 @@
                     <div class="col-md-12">
                         <form action="<?= BASE_PATH; ?>/laporan" method="GET">
                             <div class="form-group row">
-                                <div class="input-group input-group-merge col-6">
+                                <div class="input-group input-group-merge col-12">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input value="<?= isset($_GET["periode"]) && !empty($_GET["periode"]) ? date("Y-m", strtotime($_GET['periode'])) : ''; ?>" name="periode" class="form-control" placeholder="Periode ..." type="month">
-                                </div>
-                                <div class="input-group input-group-merge col-6">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <input value="<?= $_GET["kuota"]; ?>" name="kuota" class="form-control" placeholder="Kuota penerima ..." type="number">
+                                    <input value="<?= isset($_GET["periode"]) && !empty($_GET["periode"]) ? date("Y-m-d", strtotime($_GET['periode'])) : ''; ?>" name="periode" class="form-control" placeholder="Periode ..." type="date">
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-success btn-sm mt-2" type="submit">

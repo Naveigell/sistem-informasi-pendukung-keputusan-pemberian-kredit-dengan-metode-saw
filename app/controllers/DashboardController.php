@@ -40,6 +40,16 @@ class DashboardController extends Controller {
         asort($profession);
         asort($timePeriod);
 
+        $layak = 0;
+        $tidakLayak = 0;
+        foreach ($data["ranking"] as $item) {
+            if ($item["layak"]) {
+                $layak++;
+            } else {
+                $tidakLayak++;
+            }
+        }
+
         view('includes/layout', [
             "content"       => sessionGet("role") == "admin" ? "dashboard_admin" : "dashboard_kepala_lpd",
             "nasabah"       => $nasabah->count(),
@@ -47,7 +57,9 @@ class DashboardController extends Controller {
             "sub_kriteria"  => $subKriteria->countWhereNotEmpty(),
             "grafik"        => $model->graph(),
             "profesi"       => array_values($profession),
-            "time_period"   => array_values($timePeriod)
+            "time_period"   => array_values($timePeriod),
+            "total_layak"   => $layak,
+            "total_tidak_layak" => $tidakLayak
         ]);
     }
 }

@@ -24,6 +24,22 @@ class Collection {
         return $arr;
     }
 
+    public function countKeyIf($key = '', $condition = false)
+    {
+        $arr = [];
+        foreach ($this->collections as $collection) {
+            if (isset($arr[$collection[$key]])) {
+                if ($arr[$collection[$key]] == $condition) {
+                    $arr[$collection[$key]]++;
+                }
+            } else {
+                $arr[$collection[$key]] = 0;
+            }
+        }
+
+        return $arr;
+    }
+
     public function setDefault(array $array, $default)
     {
         foreach ($array as $item) {

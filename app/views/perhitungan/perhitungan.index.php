@@ -38,7 +38,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                     </div>
-                                    <input value="<?= isset($_GET["periode"]) && !empty($_GET["periode"]) ? date("Y-m", strtotime($_GET['periode'])) : ''; ?>" name="periode" class="form-control" placeholder="Periode ..." type="month">
+                                    <input value="<?= isset($_GET["periode"]) && !empty($_GET["periode"]) ? date("Y-m-d", strtotime($_GET['periode'])) : ''; ?>" name="periode" class="form-control" placeholder="Periode ..." type="date">
                                 </div>
                                 <button class="btn btn-success btn-sm mt-2" type="submit">
                                     Pilih
