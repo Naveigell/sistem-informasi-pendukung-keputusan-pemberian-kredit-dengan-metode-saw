@@ -78,13 +78,13 @@ class NasabahController extends Controller {
     {
         $request = $this->request->getAllData();
         $model = new PengajuanModel();
-        $row = $model->createPengajuan($request->id, $request->kriteria, $request->sub_kriteria);
+        try {
+            $row = $model->createPengajuan($request->id, $request->kriteria, $request->sub_kriteria);
 
-        if ($row > 0) {
             $this->session->set('success', 'Ubah pengajuan berhasil');
             redirect('/nasabah');
-        } else {
-            $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
+        } catch (\Exception $exception) {
+            $this->session->set('error', $exception->getMessage());
             redirect('/nasabah/bobot?id='.$request->id);
         }
     }
@@ -140,28 +140,28 @@ class NasabahController extends Controller {
             $jenisKelamin   = $request->jenis_kelamin;
             $periode        = $request->periode;
 
-            $model = new NasabahModel();
-            $row = $model->update([
-                "nama_nsb"              => $nama,
-                "no_kk"                 => $noKK,
-                "no_nik"                => $nik,
-                "tempat_lahir"          => $tempatLahir,
-                "tgl_lahir"             => $tanggalLahir,
-                "alamat"                => $alamat,
-                "agama"                 => $agama,
-                "email"                 => $email,
-                "no_tlp"                => $noTelepon,
-                "jenis_kelamin"         => $jenisKelamin,
-                "periode"               => date("Y-m-d", strtotime($periode)),
-            ], [
-                "id_cln_nsb"            => $request->id
-            ]);
+            try {
+                $model = new NasabahModel();
+                $row = $model->update([
+                    "nama_nsb"              => $nama,
+                    "no_kk"                 => $noKK,
+                    "no_nik"                => $nik,
+                    "tempat_lahir"          => $tempatLahir,
+                    "tgl_lahir"             => $tanggalLahir,
+                    "alamat"                => $alamat,
+                    "agama"                 => $agama,
+                    "email"                 => $email,
+                    "no_tlp"                => $noTelepon,
+                    "jenis_kelamin"         => $jenisKelamin,
+                    "periode"               => date("Y-m-d", strtotime($periode)),
+                ], [
+                    "id_cln_nsb"            => $request->id
+                ]);
 
-            if ($row > 0) {
                 $this->session->set('success', 'Ubah data nasabah berhasil');
                 redirect('/nasabah');
-            } else {
-                $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
+            } catch (\Exception $exception) {
+                $this->session->set('success', $exception->getMessage());
                 redirect('/nasabah/edit?id='.$request->id);
             }
         } else {

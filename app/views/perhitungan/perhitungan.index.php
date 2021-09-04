@@ -69,22 +69,22 @@
                                 <table class="table table-flush dataTable datatable-basic" role="grid" aria-describedby="datatable-basic_info">
                                     <thead class="thead-light">
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
+                                        <th class="sorting_asc text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 20px;">
                                             No
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
-                                        <?php foreach ($namaKriteria as $nama) { ?>
-                                            <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nama; ?></th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
+                                        <?php $i = 0; foreach ($namaKriteria as $nama) { ?>
+                                            <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nama; ?> (C<?= ++$i; ?>)</th>
                                         <?php } ?>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php $i = 0; foreach ($namaNasabah as $nasabah => $value) { ?>
                                         <tr role="row" class="even">
-                                            <td class="sorting_1"><?= ++$i; ?></td>
+                                            <td class="sorting_1 text-center"><?= ++$i; ?></td>
                                             <td class="sorting_1"><?= $nasabah; ?></td>
                                             <?php foreach ($value['nilai_fields'] as $nilai) { ?>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nilai; ?></th>
+                                                <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nilai; ?></th>
                                             <?php } ?>
                                         </tr>
                                     <?php } ?>
@@ -113,13 +113,13 @@
                                 <table class="table table-flush dataTable datatable-basic" id="datatable-basic" role="grid" aria-describedby="datatable-basic_info">
                                     <thead class="thead-light">
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 20px;">
                                             No
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
                                         <?php if (count($namaKriteria) > 0) { ?>
-                                            <?php foreach ($namaKriteria as $nama) { ?>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nama; ?></th>
+                                            <?php $i = 0; foreach ($namaKriteria as $nama) { ?>
+                                                <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nama; ?> (C<?= ++$i; ?>)</th>
                                             <?php } ?>
                                         <?php } ?>
                                     </tr>
@@ -127,11 +127,11 @@
                                     <tbody>
                                     <?php $i = 0; foreach ($namaNasabah as $nasabah => $value) { ?>
                                         <tr role="row" class="even">
-                                            <td class="sorting_1"><?= ++$i; ?></td>
+                                            <td class="sorting_1 text-center"><?= ++$i; ?></td>
                                             <td class="sorting_1"><?= $nasabah; ?></td>
                                             <?php if (count($namaKriteria) > 0) { ?>
                                                 <?php foreach ($value['normalization'] as $nilai) { ?>
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nilai; ?></th>
+                                                    <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1"><?= $nilai; ?></th>
                                                 <?php } ?>
                                             <?php } ?>
                                         </tr>
@@ -154,28 +154,28 @@
                         Halaman ini adalah tampilan saat sistem melakukan perangkingan
                     </p>
                 </div>
-                <div class="table-responsive py-4">
+                <div class="table-responsive">
                     <div id="datatable-basic_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-flush dataTable datatable-basic" role="grid" aria-describedby="datatable-basic_info">
                                     <thead class="thead-light">
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
+                                        <th class="sorting_asc text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 20px;">
                                             No
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Total Nilai</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Total Nilai</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php $i = 0; foreach ($ranking as $nasabah => $value) { ?>
                                         <tr role="row" class="even">
-                                            <td class="sorting_1"><?= ++$i; ?></td>
+                                            <td class="sorting_1 text-center"><?= ++$i; ?></td>
                                             <td class="sorting_1"><?= $nasabah; ?></td>
-                                            <td class="sorting_1"><?= $namaNasabah[$nasabah]['result']; ?></td>
-                                            <td class="sorting_1 text <?= $namaNasabah[$nasabah]['layak'] ? 'text-success' : 'text-danger' ?>"><?= $namaNasabah[$nasabah]['layak'] ? 'Layak' : 'Tidak Layak'; ?></td>
+                                            <td class="sorting_1 text-center"><?= $namaNasabah[$nasabah]['result']; ?></td>
+                                            <td class="sorting_1 text-center text <?= $namaNasabah[$nasabah]['layak'] ? 'text-success' : 'text-danger' ?>"><?= $namaNasabah[$nasabah]['layak'] ? 'Layak' : 'Tidak Layak'; ?></td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>

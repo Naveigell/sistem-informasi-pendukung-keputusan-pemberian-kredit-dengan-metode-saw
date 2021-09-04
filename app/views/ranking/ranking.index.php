@@ -62,14 +62,14 @@
                         Halaman ini adalah tampilan saat sistem melakukan perangkingan
                     </p>
                 </div>
-                <div class="table-responsive py-4">
+                <div class="table-responsive">
                     <div id="datatable-basic_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-flush dataTable datatable-basic" role="grid" aria-describedby="datatable-basic_info">
                                     <thead class="thead-light">
                                     <tr role="row">
-                                        <th class="sorting_asc text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
+                                        <th class="sorting_asc text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 20px;">
                                             Ranking
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>

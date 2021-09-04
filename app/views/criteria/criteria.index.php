@@ -32,17 +32,17 @@
                         </div>
                     <?php } ?>
                 </div>
-                <div class="table-responsive py-4">
+                <div class="table-responsive">
                     <div id="datatable-basic_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-flush dataTable" id="datatable-basic" role="grid" aria-describedby="datatable-basic_info">
                                     <thead class="thead-light">
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" aria-sort="ascending" aria-label="" style="width: 20px;">
                                             No
                                         </th>
-                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="4">Nama</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
                                         <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Bobot</th>
                                         <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
                                         <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Aksi</th>
@@ -52,7 +52,7 @@
                                     <?php for ($i = 0; $i < count($criteria); $i++) { ?>
                                         <tr role="row" class="even">
                                             <td class="sorting_1 text-center"><?= $i + 1; ?></td>
-                                            <td class="col-3" rowspan="1" colspan="4"><?= $criteria[$i]['nama_kriteria']; ?></td>
+                                            <td class="col-3"><?= $criteria[$i]['nama_kriteria']; ?></td>
                                             <td class="text-center"><?= $criteria[$i]['bobot_kriteria']; ?></td>
                                             <td class="text-center"><?= $criteria[$i]['ket_kriteria']; ?></td>
                                             <td class="text-center">

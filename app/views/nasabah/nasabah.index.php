@@ -135,24 +135,24 @@
                                 <table class="table table-flush dataTable" id="datatable-basic" role="grid" aria-describedby="datatable-basic_info">
                                     <thead class="thead-light">
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 30px;">
                                             No
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">NIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">No Telp</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Periode</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Aksi</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">NIK</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">No Telp</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Tanggal Pengajuan</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Aksi</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php for ($i = 0; $i < count($nasabah); $i++) { ?>
                                         <tr role="row" class="even">
-                                            <td class="sorting_1"><?= $i + 1; ?></td>
+                                            <td class="text-center" class="sorting_1"><?= $i + 1; ?></td>
                                             <td><?= $nasabah[$i]['nama_nsb']; ?></td>
-                                            <td><?= $nasabah[$i]['no_nik']; ?></td>
-                                            <td><?= $nasabah[$i]['no_tlp']; ?></td>
-                                            <td><?= date('Y', strtotime($nasabah[$i]['periode'])); ?></td>
+                                            <td class="text-center"><?= $nasabah[$i]['no_nik']; ?></td>
+                                            <td class="text-center"><?= $nasabah[$i]['no_tlp']; ?></td>
+                                            <td class="text-center"><?= date('d F Y', strtotime($nasabah[$i]['periode'])); ?></td>
                                             <td>
                                                 <a href="<?= BASE_PATH; ?>/nasabah/edit?id=<?= $nasabah[$i]['id_cln_nsb']; ?>" style="color: white;" type="button" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah Biodata</a>
                                                 <a href="<?= BASE_PATH; ?>/nasabah/bobot?id=<?= $nasabah[$i]['id_cln_nsb'];; ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah Kriteria</a>

@@ -78,18 +78,19 @@ class CriteriaController extends Controller {
                 "ket_kriteria"          => $keterangan,
             ];
 
-            $row = $model->update($data, [
-                "id_kriteria"       => $request->id
-            ]);
+            try {
+                $row = $model->update($data, [
+                    "id_kriteria"       => $request->id
+                ]);
 
-            if ($row > 0) {
                 $this->session->set('success', 'Ubah kriteria berhasil');
                 redirect('/criteria');
-            } else {
-                $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
+            } catch (\Exception $exception) {
+                $this->session->set('error', $exception->getMessage());
                 redirect('/criteria/edit?id='.$request->id);
             }
         } else {
+            $this->session->set('error', 'Validasi gagal');
             redirect('/criteria/edit?id='.$request->id);
         }
     }
@@ -121,14 +122,14 @@ class CriteriaController extends Controller {
         $idSubCriteria  = $request['id_subkriteria'];
 
         if (count($subKriteria) === count($subNilai)) {
-            $model = new CriteriaModel();
-            $row = $model->updateSubCriteria($id, $idSubCriteria, $subKriteria, $subNilai);
+            try {
+                $model = new CriteriaModel();
+                $row = $model->updateSubCriteria($id, $idSubCriteria, $subKriteria, $subNilai);
 
-            if ($row > 0) {
                 $this->session->set('success', 'Ubah sub kriteria berhasil');
                 redirect('/criteria');
-            } else {
-                $this->session->set('error', 'Terjadi kesalahan saat mengubah data');
+            } catch (\Exception $exception) {
+                $this->session->set('error', $exception->getMessage());
                 redirect('/criteria/edit?id='.$id);
             }
         }
@@ -164,21 +165,21 @@ class CriteriaController extends Controller {
             $bobot      = $request->weight;
             $keterangan = $request->property;
 
-            $criteria = new CriteriaModel();
-            $subCriteria = new SubCriteriaModel();
-            $id = $criteria->insert([
-                "nama_kriteria"         => $nama,
-                "bobot_kriteria"        => $bobot,
-                "ket_kriteria"          => $keterangan,
-            ], true);
+            try {
+                $criteria = new CriteriaModel();
+                $subCriteria = new SubCriteriaModel();
+                $id = $criteria->insert([
+                    "nama_kriteria"         => $nama,
+                    "bobot_kriteria"        => $bobot,
+                    "ket_kriteria"          => $keterangan,
+                ], true);
 
-            $row = $subCriteria->insertSubCriteria($id);
+                $row = $subCriteria->insertSubCriteria($id);
 
-            if ($row > 0) {
                 $this->session->set('success', 'Tambah kriteria berhasil');
                 redirect('/criteria/sub-criteria?id='.$id);
-            } else {
-                $this->session->set('error', 'Terjadi kesalahan saat menambah data');
+            } catch (\Exception $exception) {
+                $this->session->set('error', $exception->getMessage());
                 redirect('/criteria/insert');
             }
         } else {

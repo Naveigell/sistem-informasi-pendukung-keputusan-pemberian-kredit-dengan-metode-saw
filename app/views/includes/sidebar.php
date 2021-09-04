@@ -11,15 +11,6 @@
             <a class="navbar-brandd text text-center d-block" href="javascript:void(0)">
                 <img src="<?= BASE_PATH; ?>/public/assets/img/logo.png" class="navbar-brand-im" alt="...">
             </a>
-<!--            <div class=" ml-auto ">-->
-<!--                <div class="sidenav-toggler d-none d-xl-block" data-action="sidenav-unpin" data-target="#sidenav-main">-->
-<!--                    <div class="sidenav-toggler-inner">-->
-<!--                        <i class="sidenav-toggler-line"></i>-->
-<!--                        <i class="sidenav-toggler-line"></i>-->
-<!--                        <i class="sidenav-toggler-line"></i>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
         <div class="navbar-inner">
             <!-- Collapse -->
@@ -63,12 +54,6 @@
                                 <a class="nav-link" href="<?= BASE_PATH; ?>/">
                                     <i class="ni ni-shop text-primary"></i>
                                     <span class="nav-link-text">Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE_PATH; ?>/ranking">
-                                    <i class="fa fa-trophy text-dark"></i>
-                                    <span class="nav-link-text">Hasil Keputusan</span>
                                 </a>
                             </li>
                             <li class="nav-item">
