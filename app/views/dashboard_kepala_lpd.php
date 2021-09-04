@@ -24,28 +24,28 @@
             </div>
             <!-- Card stats -->
             <div class="row">
-                <div class="col-xl-3 col-md-6">
+                <div class="col-4">
                     <div class="card card-stats">
                         <!-- Card body -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">Pengajuan</h5>
-                                    <span class="h2 font-weight-bold mb-0"><?= $kriteria; ?></span>
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Jumlah nasabah</h5>
+                                    <span class="h2 font-weight-bold mb-0"><?= $nasabah; ?></span>
                                 </div>
                                 <div class="col-auto">
-                                    <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                        <i class="ni ni-collection"></i>
+                                    <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                        <i class="fa fa-user"></i>
                                     </div>
                                 </div>
                             </div>
                             <p class="mt-3 mb-0 text-sm">
-                                <a href="<?= BASE_PATH; ?>/nasabah" class="text-nowrap text text-dark">Lihat pengajuan</a>
+                                <a href="<?= BASE_PATH; ?>/nasabah" class="text-nowrap text text-dark">Lihat nasabah</a>
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
+                <div class="col-4">
                     <div class="card card-stats">
                         <!-- Card body -->
                         <div class="card-body">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
+                <div class="col-4">
                     <div class="card card-stats">
                         <!-- Card body -->
                         <div class="card-body">
@@ -83,27 +83,6 @@
                             </div>
                             <p class="mt-3 mb-0 text-sm">
                                 <a href="<?= BASE_PATH; ?>/ranking" class="text-nowrap text text-dark">Lihat ranking</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card card-stats">
-                        <!-- Card body -->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">Jumlah nasabah</h5>
-                                    <span class="h2 font-weight-bold mb-0"><?= $nasabah; ?></span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="mt-3 mb-0 text-sm">
-                                <a href="<?= BASE_PATH; ?>/nasabah" class="text-nowrap text text-dark">Lihat nasabah</a>
                             </p>
                         </div>
                     </div>

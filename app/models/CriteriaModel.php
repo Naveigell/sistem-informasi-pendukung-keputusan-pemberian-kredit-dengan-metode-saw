@@ -7,7 +7,6 @@ class CriteriaModel extends Model {
 
     public function selectWhereId($id)
     {
-
         return $this->query("SELECT * FROM $this->table WHERE id_kriteria=?", [$id]);
     }
 

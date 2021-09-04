@@ -128,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive py-4">
+                <div class="table-responsive">
                     <div id="datatable-basic_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
@@ -145,16 +145,6 @@
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Aksi</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">No</th>
-                                        <th rowspan="1" colspan="1">Nama</th>
-                                        <th rowspan="1" colspan="1">NIK</th>
-                                        <th rowspan="1" colspan="1">No Telp</th>
-                                        <th rowspan="1" colspan="1">Periode</th>
-                                        <th rowspan="1" colspan="1">Aksi</th>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
                                     <?php for ($i = 0; $i < count($nasabah); $i++) { ?>
                                         <tr role="row" class="even">

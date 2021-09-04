@@ -134,7 +134,7 @@
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-control-label" for="periode">Periode</label>
-                                    <input name="periode" type="month" class="form-control <?= flashHas('error-periode') ? 'is-invalid' : ''; ?>" id="periode" placeholder="Masukkan periode ...">
+                                    <input name="periode" type="date" class="form-control <?= flashHas('error-periode') ? 'is-invalid' : ''; ?>" id="periode" placeholder="Masukkan periode ...">
                                     <div class="invalid-feedback">
                                         <?= flashGet('error-periode')[0] ?>
                                     </div>

@@ -102,7 +102,8 @@ class SAW
         $quota = self::parseKuota();
 
         $model = new PerhitunganModel();
-        $nasabah = $model->getAll($periode["date"], $periode["month"], $periode["year"]);
+//        $nasabah = $model->getAll($periode["date"], $periode["month"], $periode["year"]);
+        $nasabah = $model->getAll();
         $nasabahCollection = new Collection($nasabah);
 
         $namaKriteria       = new CriteriaModel();
@@ -114,7 +115,7 @@ class SAW
         $keteranganKriteria = $kriteriaCollection->pluck('ket_kriteria');
 
         $namaNasabah = $nasabahCollection->groupBy('nama_nsb');
-
+//
         foreach ($namaNasabah as $key => $value) {
             $collection = new Collection($value);
             $nilai      = $collection->pluck('nilai');
@@ -213,6 +214,16 @@ class SAW
 
         // sort the ranking
         $ranking = (new Collection($namaNasabah))->sortByKey('result', Collection::SORT_DESC);
+
+        if (!is_null($periode['date']) && !is_null($periode['month']) && !is_null($periode['year'])) {
+            $namaNasabah = array_filter($namaNasabah, function ($item) use ($periode) {
+                return date('d-m-Y', strtotime($item['data']['periode'])) == $periode["date"] . '-' . $periode["month"] . '-' . $periode["year"];
+            });
+
+            $ranking = array_filter($ranking, function ($item) use ($periode) {
+                return date('d-m-Y', strtotime($item['data']['periode'])) == $periode["date"] . '-' . $periode["month"] . '-' . $periode["year"];
+            });
+        }
 
         return [
             "ranking"       => $ranking,

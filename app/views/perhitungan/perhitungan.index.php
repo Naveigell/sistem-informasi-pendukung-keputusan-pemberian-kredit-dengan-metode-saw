@@ -78,15 +78,6 @@
                                         <?php } ?>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">No</th>
-                                        <th rowspan="1" colspan="1">Nama</th>
-                                        <?php foreach ($namaKriteria as $nama) { ?>
-                                            <th rowspan="1" colspan="1"><?= ucfirst($nama); ?></th>
-                                        <?php } ?>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
                                     <?php $i = 0; foreach ($namaNasabah as $nasabah => $value) { ?>
                                         <tr role="row" class="even">
@@ -133,17 +124,6 @@
                                         <?php } ?>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">No</th>
-                                        <th rowspan="1" colspan="1">Nama</th>
-                                        <?php if (count($namaKriteria) > 0) { ?>
-                                            <?php foreach ($namaKriteria as $nama) { ?>
-                                                <th rowspan="1" colspan="1"><?= ucfirst($nama); ?></th>
-                                            <?php } ?>
-                                        <?php } ?>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
                                     <?php $i = 0; foreach ($namaNasabah as $nasabah => $value) { ?>
                                         <tr role="row" class="even">
@@ -189,14 +169,6 @@
                                         <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">No</th>
-                                        <th rowspan="1" colspan="1">Nama</th>
-                                        <th rowspan="1" colspan="1">Total Nilai</th>
-                                        <th rowspan="1" colspan="1">Keterangan</th>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
                                     <?php $i = 0; foreach ($ranking as $nasabah => $value) { ?>
                                         <tr role="row" class="even">

@@ -13,4 +13,5 @@ class NasabahModel extends Model {
         }
         return null;
     }
+
 }

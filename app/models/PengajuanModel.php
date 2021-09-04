@@ -34,4 +34,11 @@ class PengajuanModel extends Model {
 
         return $row;
     }
+
+    public function subCriteria($id_user)
+    {
+        $result = $this->query("SELECT * FROM $this->table INNER JOIN sub_kriteria ON sub_kriteria.id_subkriteria = pengajuan.id_subkriteria WHERE id_cln_nsb = ?", [$id_user]);
+
+        return $result;
+    }
 }

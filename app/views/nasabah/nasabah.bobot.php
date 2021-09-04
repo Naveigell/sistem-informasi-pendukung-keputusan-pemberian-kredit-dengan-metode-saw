@@ -3,6 +3,7 @@
  * @var $criteria
  * @var $nasabah
  * @var $grouped
+ * @var $ids
  */
 ?>
 <div class="header bg-success pb-6">
@@ -46,13 +47,13 @@
                         <form action="<?= BASE_PATH; ?>/nasabah/bobot" method="post" class="needs-validation" novalidate="">
                             <input type="text" hidden name="id" value="<?= $_GET['id']; ?>">
                             <div class="row">
-                                <?php foreach ($grouped as $key => $value) { ?>
+                                <?php $i = 1; foreach ($grouped as $key => $value) { ?>
                                     <div class="col-md-4 mb-4">
                                         <input type="text" name="kriteria[]" hidden value="<?= $value[0]['id_kriteria']; ?>">
-                                        <label class="form-control-label" for="sub_kriteria"><?= ucfirst($key); ?></label>
+                                        <label class="form-control-label" for="sub_kriteria"><?= ucfirst($key); ?> (C<?= $i++; ?>)</label>
                                         <select class="form-control" name="sub_kriteria[]" id="sub_kriteria">
                                             <?php foreach ($value as $item) { ?>
-                                                <option value="<?= $item['id_subkriteria']; ?>"><?= $item['ket']; ?></option>
+                                                <option <?= in_array($item['id_subkriteria'], $ids) ? 'selected' : ''; ?> value="<?= $item['id_subkriteria']; ?>"><?= $item['ket']; ?></option>
                                             <?php } ?>
                                         </select>
                                         <div class="valid-feedback">

@@ -73,41 +73,27 @@
                                 <table class="table table-flush dataTable datatable-basic" role="grid" aria-describedby="datatable-basic_info">
                                     <thead class="thead-light">
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">
+                                        <th class="sorting_asc text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">
                                             No
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">NIK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">No KK</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Alamat</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">No Tlp</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Agama</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">NIK</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Alamat</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">No Tlp</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Tanggal Pengajuan</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">No</th>
-                                        <th rowspan="1" colspan="1">Nama</th>
-                                        <th rowspan="1" colspan="1">NIK</th>
-                                        <th rowspan="1" colspan="1">No KK</th>
-                                        <th rowspan="1" colspan="1">Alamat</th>
-                                        <th rowspan="1" colspan="1">No Tlp</th>
-                                        <th rowspan="1" colspan="1">Agama</th>
-                                        <th rowspan="1" colspan="1">Keterangan</th>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
                                     <?php $i = 0; foreach ($ranking as $nasabah => $value) { ?>
                                         <tr role="row" class="even">
-                                            <td class="sorting_1"><?= ++$i; ?></td>
-                                            <td class="sorting_1"><?= $nasabah; ?></td>
-                                            <td class="sorting_1"><?= $namaNasabah[$nasabah]['data']["no_nik"]; ?></td>
-                                            <td class="sorting_1"><?= $namaNasabah[$nasabah]['data']["no_kk"]; ?></td>
-                                            <td class="sorting_1"><?= $namaNasabah[$nasabah]['data']["alamat"]; ?></td>
-                                            <td class="sorting_1"><?= $namaNasabah[$nasabah]['data']["no_tlp"]; ?></td>
-                                            <td class="sorting_1"><?= $namaNasabah[$nasabah]['data']["agama"]; ?></td>
-                                            <td class="sorting_1 text <?= $namaNasabah[$nasabah]['layak'] ? 'text-success' : 'text-danger' ?>"><?= $namaNasabah[$nasabah]['layak'] ? 'Layak' : 'Tidak Layak'; ?></td>
+                                            <td class="sorting_1 text-center"><?= ++$i; ?></td>
+                                            <td class="sorting_1 col-3"><?= $nasabah; ?></td>
+                                            <td class="sorting_1 text-center"><?= $namaNasabah[$nasabah]['data']["no_nik"]; ?></td>
+                                            <td class="sorting_1 text-center"><?= $namaNasabah[$nasabah]['data']["alamat"]; ?></td>
+                                            <td class="sorting_1 text-center"><?= $namaNasabah[$nasabah]['data']["no_tlp"]; ?></td>
+                                            <td class="sorting_1 text-center"><?= date('d F Y', strtotime($namaNasabah[$nasabah]['data']["periode"])); ?></td>
+                                            <td class="sorting_1 text-center text <?= $namaNasabah[$nasabah]['layak'] ? 'text-success' : 'text-danger' ?>"><?= $namaNasabah[$nasabah]['layak'] ? 'Layak' : 'Tidak Layak'; ?></td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>

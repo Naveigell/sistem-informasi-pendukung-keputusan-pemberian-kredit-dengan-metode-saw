@@ -47,17 +47,20 @@ class NasabahController extends Controller {
     public function bobot()
     {
         $criteria = new CriteriaModel();
-        $c = $criteria->getCriteriaAndSubCriteria();
+        $criterias = $criteria->getCriteriaAndSubCriteria();
 
         $nasabah = (new NasabahModel())->first($_GET['id']);
+        $nasabahSubCriteria = (new PengajuanModel())->subCriteria($_GET['id']);
+        $nasabahIdSubCriteria = (new Collection($nasabahSubCriteria))->pluck('id_subkriteria');
 
-        $array = new Collection($c);
+        $array = new Collection($criterias);
         $grouped = $array->groupBy('nama_kriteria');
 
         view('includes/layout', [
             'content'       => "nasabah/nasabah.bobot",
             'grouped'       => $grouped,
-            'nasabah'       => $nasabah
+            'nasabah'       => $nasabah,
+            'ids'           => $nasabahIdSubCriteria,
         ]);
     }
 
@@ -74,8 +77,8 @@ class NasabahController extends Controller {
     public function updateBobot()
     {
         $request = $this->request->getAllData();
-        $p = new PengajuanModel();
-        $row = $p->createPengajuan($request->id, $request->kriteria, $request->sub_kriteria);
+        $model = new PengajuanModel();
+        $row = $model->createPengajuan($request->id, $request->kriteria, $request->sub_kriteria);
 
         if ($row > 0) {
             $this->session->set('success', 'Ubah pengajuan berhasil');

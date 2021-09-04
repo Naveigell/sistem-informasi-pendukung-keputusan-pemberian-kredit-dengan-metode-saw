@@ -39,32 +39,23 @@
                                 <table class="table table-flush dataTable" id="datatable-basic" role="grid" aria-describedby="datatable-basic_info">
                                     <thead class="thead-light">
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-basic" rowspan="1" aria-sort="ascending" aria-label="" style="width: 215.637px;">
                                             No
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Bobot</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
-                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Aksi</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="4">Nama</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Bobot</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Aksi</th>
                                     </tr>
                                     </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th rowspan="1" colspan="1">No</th>
-                                        <th rowspan="1" colspan="1">Nama</th>
-                                        <th rowspan="1" colspan="1">Bobot</th>
-                                        <th rowspan="1" colspan="1">Keterangan</th>
-                                        <th rowspan="1" colspan="1">Aksi</th>
-                                    </tr>
-                                    </tfoot>
                                     <tbody>
                                     <?php for ($i = 0; $i < count($criteria); $i++) { ?>
                                         <tr role="row" class="even">
-                                            <td class="sorting_1"><?= $i + 1; ?></td>
-                                            <td><?= $criteria[$i]['nama_kriteria']; ?></td>
-                                            <td><?= $criteria[$i]['bobot_kriteria']; ?></td>
-                                            <td><?= $criteria[$i]['ket_kriteria']; ?></td>
-                                            <td>
+                                            <td class="sorting_1 text-center"><?= $i + 1; ?></td>
+                                            <td class="col-3" rowspan="1" colspan="4"><?= $criteria[$i]['nama_kriteria']; ?></td>
+                                            <td class="text-center"><?= $criteria[$i]['bobot_kriteria']; ?></td>
+                                            <td class="text-center"><?= $criteria[$i]['ket_kriteria']; ?></td>
+                                            <td class="text-center">
                                                 <a href="<?= BASE_PATH; ?>/criteria/edit?id=<?= $criteria[$i]['id_kriteria'] ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah</a>
                                                 <button style="color: white;" data-name="<?= $criteria[$i]['nama_kriteria']; ?>" data-id="<?= $criteria[$i]['id_kriteria']; ?>" type="button" class="btn btn-danger btn-sm button-delete"><i class="fa fa-trash"></i>&nbsp; Hapus</button>
                                             </td>
