@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-require_once __DIR__.'/vendor/autoload.php';
-
 define("START_TIME", microtime(true));
 
 require_once 'system/helpers.php';

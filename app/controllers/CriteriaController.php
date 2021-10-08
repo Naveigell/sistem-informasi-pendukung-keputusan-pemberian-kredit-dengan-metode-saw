@@ -167,6 +167,12 @@ class CriteriaController extends Controller {
 
             try {
                 $criteria = new CriteriaModel();
+
+                if ($criteria->criteriaExists($nama)) {
+                    $this->session->set('error', 'Sudah ada kriteria dengan nama yang sama');
+                    redirect('/criteria/insert');
+                }
+
                 $subCriteria = new SubCriteriaModel();
                 $id = $criteria->insert([
                     "nama_kriteria"         => $nama,

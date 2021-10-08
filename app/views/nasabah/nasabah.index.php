@@ -154,10 +154,10 @@
                                             <td class="text-center"><?= $nasabah[$i]['no_tlp']; ?></td>
                                             <td class="text-center"><?= date('d F Y', strtotime($nasabah[$i]['periode'])); ?></td>
                                             <td>
-                                                <a href="<?= BASE_PATH; ?>/nasabah/edit?id=<?= $nasabah[$i]['id_cln_nsb']; ?>" style="color: white;" type="button" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah Biodata</a>
-                                                <a href="<?= BASE_PATH; ?>/nasabah/bobot?id=<?= $nasabah[$i]['id_cln_nsb'];; ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah Kriteria</a>
-                                                <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_cln_nsb']; ?>" type="button" class="btn btn-warning btn-sm button-detail" data-toggle="modal" data-target="#detail-modal"><i class="fa fa-eye"></i>&nbsp; Detail</button>
-                                                <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_cln_nsb']; ?>" type="button" class="btn btn-danger btn-sm button-delete"><i class="fa fa-trash"></i>&nbsp; Hapus</button>
+                                                <a href="<?= BASE_PATH; ?>/nasabah/edit?id=<?= $nasabah[$i]['id_nsb']; ?>" style="color: white;" type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil-alt"></i>&nbsp; Ubah Biodata</a>
+                                                <a href="<?= BASE_PATH; ?>/nasabah/bobot?id=<?= $nasabah[$i]['id_nsb'];; ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-pencil-alt"></i>&nbsp; Ubah Kriteria</a>
+                                                <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_nsb']; ?>" type="button" class="btn btn-warning btn-sm button-detail" data-toggle="modal" data-target="#detail-modal"><i class="fa fa-eye"></i>&nbsp; Detail</button>
+                                                <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_nsb']; ?>" type="button" class="btn btn-danger btn-sm button-delete"><i class="fa fa-trash"></i>&nbsp; Hapus</button>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -208,46 +208,43 @@
                                 });
                             });
                         }
-                    </script>
-                    <script>
-                        $(document).ready(function () {
-                            const deleteButtons = $(".button-delete");
 
-                            for (const button of deleteButtons) {
-                                button.addEventListener('click', function (evt) {
-                                    const id = evt.target.getAttribute('data-id');
-                                    const name = evt.target.getAttribute('data-name');
+                        const deleteButtons = $(".button-delete");
 
-                                    Swal.fire({
-                                        title: `Yakin menghapus nasabah <b>${name}</b>?`,
-                                        text: "Data yang dihapus tidak akan bisa dikembalikan",
-                                        icon: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Hapus',
-                                        cancelButtonText: 'Batal'
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: `<?= BASE_PATH; ?>/nasabah/delete?id=${id}`,
-                                                success: function (response) {
-                                                    console.log(response)
-                                                    Swal.fire(
-                                                        'Berhasil dihapus!',
-                                                        response.message,
-                                                        'success'
-                                                    ).then(() => {
-                                                        window.location.reload();
-                                                    });
-                                                }
-                                            });
-                                        }
-                                    })
-                                });
-                            }
-                        });
+                        for (const button of deleteButtons) {
+                            button.addEventListener('click', function (evt) {
+                                const id = evt.target.getAttribute('data-id');
+                                const name = evt.target.getAttribute('data-name');
+
+                                Swal.fire({
+                                    title: `Yakin menghapus nasabah <b>${name}</b>?`,
+                                    text: "Data yang dihapus tidak akan bisa dikembalikan",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Hapus',
+                                    cancelButtonText: 'Batal'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: `<?= BASE_PATH; ?>/nasabah/delete?id=${id}`,
+                                            success: function (response) {
+                                                console.log(response)
+                                                Swal.fire(
+                                                    'Berhasil dihapus!',
+                                                    response.message,
+                                                    'success'
+                                                ).then(() => {
+                                                    window.location.reload();
+                                                });
+                                            }
+                                        });
+                                    }
+                                })
+                            });
+                        }
                     </script>
                 </div>
             </div>

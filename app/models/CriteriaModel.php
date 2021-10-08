@@ -15,6 +15,11 @@ class CriteriaModel extends Model {
         return $this->query("SELECT * FROM $this->table INNER JOIN sub_kriteria ON $this->table.id_kriteria = sub_kriteria.id_kriteria GROUP BY sub_kriteria.id_subkriteria");
     }
 
+    public function criteriaExists($name)
+    {
+        return $this->query("SELECT COUNT($this->primaryKey) as _total FROM $this->table WHERE nama_kriteria = '$name'")[0]["_total"] > 0;
+    }
+
     public function updateSubCriteria($idKriteria, $idSubKriteria, $subKriteria, $subNilai)
     {
         $nilai = [

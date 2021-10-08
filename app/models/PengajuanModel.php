@@ -23,9 +23,9 @@ class PengajuanModel extends Model {
         $this->connection->beginTransaction();
         try {
             $this->delete([
-                'id_cln_nsb'        => $clnNasabah
+                'id_nsb'        => $clnNasabah
             ]);
-            $row = $this->insertMultiple("INSERT INTO pengajuan(id_kriteria, id_cln_nsb, id_subkriteria) VALUES".$sql, $bindings);
+            $row = $this->insertMultiple("INSERT INTO pengajuan(id_kriteria, id_nsb, id_subkriteria) VALUES".$sql, $bindings);
 
             $this->connection->commit();
         } catch (\Exception $exception) {
@@ -37,7 +37,7 @@ class PengajuanModel extends Model {
 
     public function subCriteria($id_user)
     {
-        $result = $this->query("SELECT * FROM $this->table INNER JOIN sub_kriteria ON sub_kriteria.id_subkriteria = pengajuan.id_subkriteria WHERE id_cln_nsb = ?", [$id_user]);
+        $result = $this->query("SELECT * FROM $this->table INNER JOIN sub_kriteria ON sub_kriteria.id_subkriteria = pengajuan.id_subkriteria WHERE id_nsb = ?", [$id_user]);
 
         return $result;
     }

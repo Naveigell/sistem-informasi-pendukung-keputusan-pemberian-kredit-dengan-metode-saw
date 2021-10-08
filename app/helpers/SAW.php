@@ -102,7 +102,6 @@ class SAW
         $quota = self::parseKuota();
 
         $model = new PerhitunganModel();
-//        $nasabah = $model->getAll($periode["date"], $periode["month"], $periode["year"]);
         $nasabah = $model->getAll();
         $nasabahCollection = new Collection($nasabah);
 
@@ -115,7 +114,7 @@ class SAW
         $keteranganKriteria = $kriteriaCollection->pluck('ket_kriteria');
 
         $namaNasabah = $nasabahCollection->groupBy('nama_nsb');
-//
+
         foreach ($namaNasabah as $key => $value) {
             $collection = new Collection($value);
             $nilai      = $collection->pluck('nilai');

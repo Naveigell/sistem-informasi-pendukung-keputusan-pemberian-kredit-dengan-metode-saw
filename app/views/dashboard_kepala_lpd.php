@@ -173,7 +173,7 @@
                             return total + current;
                         }, 0);
 
-                        return  label + " : " + ((value / total) * 100) + " %";
+                        return  label + " : " + Math.round((value / total) * 100) + " %";
                     }
                 }
             },
@@ -231,12 +231,14 @@
                             return total + current;
                         }, 0);
 
-                        return  label + " : " + ((value / total) * 100) + " %";
+                        return  label + " : " + Math.round((value / total) * 100) + " %";
                     }
                 }
             },
             legend: {
-                display: false
+                labels: {
+                    fontColor: 'white'
+                }
             },
             scales: {
                 yAxes: [{

@@ -35,7 +35,7 @@ class DashboardController extends Controller {
         $timePeriodCount = (new Collection($criteriaCollection["Jangka waktu"]))->countKey('ket');
 
         $profession = (new Collection($professionCount))->setDefault(['Pedagang', 'PNS', 'Wiraswasta', 'Tidak Tetap'], 0);
-        $timePeriod = (new Collection($timePeriodCount))->setDefault(['>36 bulan', '≥24 bulan - < 36 bulan', '≥12 bulan - < 24 bulan', '< 12 bln'], 0);
+        $timePeriod = (new Collection($timePeriodCount))->setDefault(['≥36 bulan', '≥24 bulan - <36 bulan', '≥12 bulan - < 24 bulan', '< 12 bln'], 0);
 
         asort($profession);
         asort($timePeriod);

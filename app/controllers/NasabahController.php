@@ -91,7 +91,7 @@ class NasabahController extends Controller {
 
     public function delete()
     {
-        $row = (new NasabahModel())->delete(["id_cln_nsb" => $_GET['id']]);
+        $row = (new NasabahModel())->delete(["id_nsb" => $_GET['id']]);
         if ($row > 0) {
             http_response_code(201);
             echo json_encode([
@@ -113,7 +113,7 @@ class NasabahController extends Controller {
             "id"                    => ["rules" => "required|min:1"],
             "nama"                  => ["rules" => "required",],
             "no_kk"                 => ["rules" => "required",],
-            "nik"                   => ["rules" => "required",],
+            "nik"                   => ["rules" => "required|min:16",],
             "tempat_lahir"          => ["rules" => "required",],
             "tanggal_lahir"         => ["rules" => "required",],
             "alamat"                => ["rules" => "required",],
@@ -155,7 +155,7 @@ class NasabahController extends Controller {
                     "jenis_kelamin"         => $jenisKelamin,
                     "periode"               => date("Y-m-d", strtotime($periode)),
                 ], [
-                    "id_cln_nsb"            => $request->id
+                    "id_nsb"            => $request->id
                 ]);
 
                 $this->session->set('success', 'Ubah data nasabah berhasil');
@@ -174,7 +174,7 @@ class NasabahController extends Controller {
         $this->validator->make($_POST, [
             "nama"                  => ["rules" => "required",],
             "no_kk"                 => ["rules" => "required",],
-            "nik"                   => ["rules" => "required",],
+            "nik"                   => ["rules" => "required|min:16",],
             "tempat_lahir"          => ["rules" => "required",],
             "tanggal_lahir"         => ["rules" => "required",],
             "alamat"                => ["rules" => "required",],

@@ -10,8 +10,8 @@ class PerhitunganModel extends Model {
         }
 
         return $this->query(
-            "SELECT * FROM cln_nasabah 
-                LEFT JOIN pengajuan ON pengajuan.id_cln_nsb = cln_nasabah.id_cln_nsb
+            "SELECT * FROM nasabah 
+                LEFT JOIN pengajuan ON pengajuan.id_nsb = nasabah.id_nsb
                 LEFT JOIN kriteria ON kriteria.id_kriteria = pengajuan.id_kriteria
                 LEFT JOIN sub_kriteria ON sub_kriteria.id_subkriteria = pengajuan.id_subkriteria".$where
         );
