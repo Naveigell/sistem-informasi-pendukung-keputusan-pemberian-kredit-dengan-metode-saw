@@ -6,6 +6,8 @@ class SimpleAdditiveWeighting {
     private static $normalize = [];
     private static $result = [];
 
+    public static $test;
+
     const CRITERIA_COST = 'COST';
     const CRITERIA_BENEFIT = 'BENEFIT';
 
@@ -24,7 +26,7 @@ class SimpleAdditiveWeighting {
         return self::$data;
     }
 
-    public static function addData($data = [], $weight = 1, $criteria = self::CRITERIA_COST)
+    public static function addData($data = [], $weight = 1, $criteria = self::CRITERIA_BENEFIT)
     {
         array_push(self::$data, [
             'criteria'      => $criteria,
@@ -56,49 +58,52 @@ class SimpleAdditiveWeighting {
         $tempData = [];
         self::$data = self::$normalize;
 
+        //looping masing" data menjadi items
+        //
         foreach (self::$data as $items) {
             $values = [];
             foreach ($items['data'] as $item) {
-                array_push($values, round($item * $items['weight'], 3));
+                array_push($values, round($item * $items['weight'], 3));//hasil perkalian masukan ke variabel value
             }
 
-            array_push($tempData, $values);
+            array_push($tempData, $values);// hasil dari value masuk ke tempData
         }
 
         $result = [];
+        //cek apakah ada datanya (>0)
         if (count($tempData) > 0) {
 
-            for ($i = 0; $i < count($tempData[0]); $i++) {
+            for ($i = 0; $i < count($tempData[0]); $i++) { //looping array tiap nasabah
                 $value = 0;
-                for ($j = 0; $j < count($tempData); $j++) {
-                    $value += $tempData[$j][$i];
+                for ($j = 0; $j < count($tempData); $j++) { //looping tiap item
+                    $value += $tempData[$j][$i]; //proses penjumlahan hasil seluruhnya
                 }
-                array_push($result, round($value, 4));
+                array_push($result, round($value, 3));//hasilnya 3 angka belakang koma, dimasukan kedlm variabel result 
             }
         }
 
         self::$result = $result;
     }
 
+    //buat liat hasil dari normalisasinya 
     public static function normalizationResult($type = self::ONLY_DATA)
     {
         if ($type === self::ONLY_DATA) {
             $plucked = [];
             foreach (self::$normalize as $collection) {
-                if (array_key_exists('data', $collection)) {
-                    array_push($plucked, $collection['data']);
+                if (array_key_exists('data', $collection)) { //mengecek apakah di colection ada data
+                    array_push($plucked, $collection['data']);//masukan dalam variabel plucked
                 }
             }
 
             return $plucked;
         }
+
+        // mengembalikan nilai normalize
         return self::$normalize;
     }
-    // B   C
-    // [7, 4, 1, 5, 6]
-    // [1, 2, 3, 4, 5]
-    // [6, 7, 8, 8, 9]
 
+    // proses normalisasi 
     public static function normalize()
     {
         foreach (self::$normalize as &$items) {
@@ -120,7 +125,7 @@ class SimpleAdditiveWeighting {
         }
     }
 
-    public static function clear()
+    public static function clear() //hanya untuk jaga"
     {
         self::$data = [];
         self::$normalize = [];

@@ -10,7 +10,7 @@ class CriteriaModel extends Model {
         return $this->query("SELECT * FROM $this->table WHERE id_kriteria=?", [$id]);
     }
 
-    public function getCriteriaAndSubCriteria()
+    public function getCriteriaAndSubCriteria() // metod
     {
         return $this->query("SELECT * FROM $this->table INNER JOIN sub_kriteria ON $this->table.id_kriteria = sub_kriteria.id_kriteria GROUP BY sub_kriteria.id_subkriteria");
     }
@@ -36,7 +36,7 @@ class CriteriaModel extends Model {
 
         $string1 = $this->bulkUpdateSql($nilai['key'], $nilai);
         $ids1 = implode(',', $nilai['cases']);
-        $key1 = $nilai['key'];
+        $key1 = $nilai['key']; 
 
         $string2 = $this->bulkUpdateSql($kriteria['key'], $kriteria, true);
 
@@ -62,3 +62,5 @@ class CriteriaModel extends Model {
         return $sql;
     }
 }
+
+//

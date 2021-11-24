@@ -56,7 +56,7 @@
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-control-label" for="nik">NIK</label>
-                                    <input name="nik" type="number" class="form-control <?= flashHas('error-nik') ? 'is-invalid' : ''; ?>" id="nik" placeholder="Masukkan nik ...">
+                                    <input name="nik" type="text" maxlength="16" class="form-control <?= flashHas('error-nik') ? 'is-invalid' : ''; ?>" id="nik" placeholder="Masukkan nik ...">
                                     <div class="invalid-feedback">
                                         <?= flashGet('error-nik')[0] ?>
                                     </div>

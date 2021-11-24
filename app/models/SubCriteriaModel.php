@@ -18,7 +18,7 @@ class SubCriteriaModel extends Model {
         return (int) $query->fetch()["_total"];
     }
 
-    public function insertSubCriteria($idKriteria, $count = 5)
+    public function insertSubCriteria($idKriteria, $count = 4)
     {
         $sql = "INSERT INTO sub_kriteria(id_kriteria, ket, nilai) VALUES";
         for ($i = 0; $i < $count; $i++) {

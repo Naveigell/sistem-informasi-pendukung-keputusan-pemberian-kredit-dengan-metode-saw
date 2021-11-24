@@ -14,7 +14,7 @@ class CriteriaController extends Controller {
      */
     private $validator;
 
-    public function __construct()
+    public function __construct() //method
     {
         parent::__construct();
 
@@ -34,7 +34,7 @@ class CriteriaController extends Controller {
 
     public function edit()
     {
-        $id = $this->request->getAllParams()->id;
+        $id = $this->request->getAllParams()->id; // ngambil data yg di get
         $criteria       = new CriteriaModel();
         $subCriteria    = new SubCriteriaModel();
 
@@ -54,7 +54,7 @@ class CriteriaController extends Controller {
 
     public function update()
     {
-        $request        = $this->request->getAllData();
+        $request        = $this->request->getAllData(); //data ngambil data yg di post 
 
         $this->validator->make($_POST, [
             "id"            => ["rules" => "required",],

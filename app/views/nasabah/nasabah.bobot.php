@@ -11,7 +11,7 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Ubah Bobot Nasabah</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">Tambah Kriteria Nasabah</h6>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header">
-                        <h3 class="mb-0">Input data bobot nasabah</h3>
+                        <h3 class="mb-0">Input data kriteria nasabah</h3>
                     </div>
                     <!-- Card body -->
                     <div class="card-body">
@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-lg-8">
                                     <p class="mb-0">
-                                        Masukkan data bobot untuk <strong style="font-weight: bold;"><?= $nasabah['nama_nsb'] ?></strong>
+                                        Masukkan data kriteria untuk <strong style="font-weight: bold;"><?= $nasabah['nama_nsb'] ?></strong>
                                     </p>
                                 </div>
                             </div>

@@ -13,6 +13,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <h1 class="text-white">Sistem Informasi Pendukung Keputusan</h1>
+                        <h1 class="text-white">Kelayakan Pemberian Kredit LPD Desa Pakraman Bekul</h1>
                         <p class="text-lead text-white">Silakan masukkan username dan password agar dapat mengakses sistem</p>
                     </div>
                 </div>
@@ -57,7 +58,7 @@
                                 </label>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary my-4" style="background: #000080; border-color: #000080;">Sign in</button>
+                                <button type="submit" class="btn btn-primary my-4" style="background: #000080; border-color: #000080;">Log in</button>
                             </div>
                         </form>
                     </div>

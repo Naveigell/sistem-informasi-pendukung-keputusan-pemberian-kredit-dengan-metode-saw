@@ -5,6 +5,10 @@
  * @var $sub_kriteria
  * @var $time_period
  * @var $profesi
+ * @var $income
+ * @var $expend
+ * @var $age
+ * @var $guarantee
  * @var $total_layak
  * @var $total_tidak_layak
  */
@@ -39,9 +43,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-3 mb-0 text-sm">
-                                <a href="<?= BASE_PATH; ?>/nasabah" class="text-nowrap text text-dark">Lihat nasabah</a>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -60,9 +61,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-3 mb-0 text-sm">
-                                <a href="<?= BASE_PATH; ?>/ranking" class="text-nowrap text text-dark">Lihat ranking</a>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -81,17 +79,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="mt-3 mb-0 text-sm">
-                                <a href="<?= BASE_PATH; ?>/ranking" class="text-nowrap text text-dark">Lihat ranking</a>
-                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid mt--6">
+</div><div class="container-fluid mt-6">
     <div class="row">
         <div class="col-xl-12">
             <div class="card bg-default">
@@ -99,9 +93,7 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <h6 class="text-light text-uppercase ls-1 mb-1">Grafik</h6>
-                            <h5 class="h3 text-white mb-0">
-                                Jumlah nasabah yang diterima berdasarkan pekerjaan
-                            </h5>
+                            <h5 class="h3 text-white mb-0">Jumlah nasabah yang diterima berdasarkan Pendapatan Per Bulan</h5>
                         </div>
                     </div>
                 </div>
@@ -110,6 +102,99 @@
                     <div class="chart">
                         <!-- Chart wrapper -->
                         <canvas id="graph-1" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--0">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card bg-default">
+                <div class="card-header bg-transparent">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="text-light text-uppercase ls-1 mb-1">Grafik</h6>
+                            <h5 class="h3 text-white mb-0">
+                                Jumlah nasabah yang diterima berdasarkan pekerjaan</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Chart -->
+                    <div class="chart">
+                        <!-- Chart wrapper -->
+                        <canvas id="graph-2" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-0">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card bg-default">
+                <div class="card-header bg-transparent">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="text-light text-uppercase ls-1 mb-1">Grafik</h6>
+                            <h5 class="h3 text-white mb-0">Jumlah nasabah yang diterima berdasarkan jaminan</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Chart -->
+                    <div class="chart">
+                        <!-- Chart wrapper -->
+                        <canvas id="graph-3" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-0">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card bg-default">
+                <div class="card-header bg-transparent">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="text-light text-uppercase ls-1 mb-1">Grafik</h6>
+                            <h5 class="h3 text-white mb-0">Jumlah nasabah yang diterima berdasarkan Pengeluaran Per Bulan</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Chart -->
+                    <div class="chart">
+                        <!-- Chart wrapper -->
+                        <canvas id="graph-4" class="chart-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt-0">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card bg-default">
+                <div class="card-header bg-transparent">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h6 class="text-light text-uppercase ls-1 mb-1">Grafik</h6>
+                            <h5 class="h3 text-white mb-0">Jumlah nasabah yang diterima berdasarkan Usia</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Chart -->
+                    <div class="chart">
+                        <!-- Chart wrapper -->
+                        <canvas id="graph-5" class="chart-canvas"></canvas>
                     </div>
                 </div>
             </div>
@@ -132,7 +217,7 @@
                     <!-- Chart -->
                     <div class="chart">
                         <!-- Chart wrapper -->
-                        <canvas id="graph-2" class="chart-canvas"></canvas>
+                        <canvas id="graph-6" class="chart-canvas"></canvas>
                     </div>
                 </div>
             </div>
@@ -142,7 +227,66 @@
 
 <script src="<?php echo BASE_PATH; ?>/public/assets/vendor/chart.js/dist/Chart.min.js"></script>
 <script>
-    let ctx = document.getElementById('graph-1').getContext('2d');
+    let ctx2 = document.getElementById('graph-1').getContext('2d');
+    let myChart2 = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ["≥ 15.000.000","≥ 8.000.000 - < 15.000.000","≥ 3.000.000 - < 8.000.000","<3.000.000"],
+            datasets: [{
+                label: 'Total nasabah',
+                data: <?= json_encode($pendapatan); ?>,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                ],
+                borderColor: "#ddd",
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            tooltips: {
+                mode: 'label',
+                callbacks: {
+                    label: function(item, data) {
+                        const index = item.index;
+                        const value = data.datasets[0].data[index];
+                        const label = data.labels[index];
+
+                        const total = data.datasets[0].data.reduce(function (total, current) {
+                            return total + current;
+                        }, 0);
+
+                        return  label + " : " + Math.round((value / total) * 100) + " %";
+                    }
+                }
+            },
+            legend: {
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        display: false
+                    },
+                }],
+                xAxes: [{
+                    ticks: {
+                        display: false
+                    },
+                }],
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+</script>
+
+<script>
+    let ctx = document.getElementById('graph-2').getContext('2d');
     let myChart = new Chart(ctx, {
         type: 'pie',
         data: {
@@ -200,7 +344,181 @@
     });
 </script>
 <script>
-    let ctx1 = document.getElementById('graph-2').getContext('2d');
+    let ctx3 = document.getElementById('graph-3').getContext('2d');
+    let myChart3 = new Chart(ctx3, {
+        type: 'pie',
+        data: {
+            labels: ['Sertifikat tanah','Sertifikat rumah','BPKB diatas tahun 2015 ','BPKB dibawah tahun 2015 '],
+            datasets: [{
+                label: 'Total nasabah',
+                data: <?= json_encode($jaminan); ?>,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                ],
+                borderColor: "#ddd",
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            tooltips: {
+                mode: 'label',
+                callbacks: {
+                    label: function(item, data) {
+                        const index = item.index;
+                        const value = data.datasets[0].data[index];
+                        const label = data.labels[index];
+
+                        const total = data.datasets[0].data.reduce(function (total, current) {
+                            return total + current;
+                        }, 0);
+
+                        return  label + " : " + Math.round((value / total) * 100) + " %";
+                    }
+                }
+            },
+            legend: {
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        display: false
+                    },
+                }],
+                xAxes: [{
+                    ticks: {
+                        display: false
+                    },
+                }],
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+</script>
+<script>
+    let ctx4 = document.getElementById('graph-4').getContext('2d');
+    let myChart4 = new Chart(ctx4, {
+        type: 'pie',
+        data: {
+            labels: ['≥10.000.000','≥6.000.000 - < 10.000.000','≥3.000.000 - < 6.00.000','<3.000.000'],
+            datasets: [{
+                label: 'Total nasabah',
+                data: <?= json_encode($pengeluaran); ?>,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                ],
+                borderColor: "#ddd",
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            tooltips: {
+                mode: 'label',
+                callbacks: {
+                    label: function(item, data) {
+                        const index = item.index;
+                        const value = data.datasets[0].data[index];
+                        const label = data.labels[index];
+
+                        const total = data.datasets[0].data.reduce(function (total, current) {
+                            return total + current;
+                        }, 0);
+
+                        return  label + " : " + Math.round((value / total) * 100) + " %";
+                    }
+                }
+            },
+            legend: {
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        display: false
+                    },
+                }],
+                xAxes: [{
+                    ticks: {
+                        display: false
+                    },
+                }],
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+</script>
+<script>
+    let ctx5 = document.getElementById('graph-5').getContext('2d');
+    let myChart5 = new Chart(ctx5, {
+        type: 'pie',
+        data: {
+            labels: ['> 50 tahun','36 tahun - 50 tahun','26 tahun - 35 tahun','21 tahun - 25 tahun'],
+            datasets: [{
+                label: 'Total nasabah',
+                data: <?= json_encode($age); ?>,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                ],
+                borderColor: "#ddd",
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            tooltips: {
+                mode: 'label',
+                callbacks: {
+                    label: function(item, data) {
+                        const index = item.index;
+                        const value = data.datasets[0].data[index];
+                        const label = data.labels[index];
+
+                        const total = data.datasets[0].data.reduce(function (total, current) {
+                            return total + current;
+                        }, 0);
+
+                        return  label + " : " + Math.round((value / total) * 100) + " %";
+                    }
+                }
+            },
+            legend: {
+                labels: {
+                    fontColor: 'white'
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        display: false
+                    },
+                }],
+                xAxes: [{
+                    ticks: {
+                        display: false
+                    },
+                }],
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+    });
+</script>
+<script>
+    let ctx1 = document.getElementById('graph-6').getContext('2d');
     let myChart1 = new Chart(ctx1, {
         type: 'pie',
         data: {

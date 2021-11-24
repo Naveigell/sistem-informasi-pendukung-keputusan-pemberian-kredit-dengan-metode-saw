@@ -44,7 +44,7 @@ class LaporanController extends Controller
 
        $dompPdf->setPaper('f4', 'landscape');
        $dompPdf->render();
-       $dompPdf->stream("usulan_calon_".uniqid());
+       $dompPdf->stream("Laporan_kelayakan_kredit".uniqid());
        exit();
     }
 }

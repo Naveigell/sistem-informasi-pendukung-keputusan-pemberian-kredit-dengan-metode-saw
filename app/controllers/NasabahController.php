@@ -185,10 +185,16 @@ class NasabahController extends Controller {
             "periode"               => ["rules" => "required",],
         ]);
 
-        if ($this->validator->success()) {
-            $this->validator->clear();
+        $model   = new NasabahModel();
+        $request = $this->request->getAllData();
 
-            $request        = $this->request->getAllData();
+        if ($model->countNIK($request->nik) > 0) {
+            $this->session->set('error-nik', ['Nomor nik sudah digunakan']);
+            redirect('/nasabah/insert');
+
+
+        } else if ($this->validator->success()) {
+            $this->validator->clear();
             $nama           = $request->nama;
             $noKK           = $request->no_kk;
             $nik            = $request->nik;
@@ -201,7 +207,6 @@ class NasabahController extends Controller {
             $jenisKelamin   = $request->jenis_kelamin;
             $periode        = $request->periode;
 
-            $model = new NasabahModel();
             $id = $model->insert([
                 "nama_nsb"              => $nama,
                 "no_kk"                 => $noKK,

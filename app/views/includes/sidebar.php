@@ -34,7 +34,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_PATH; ?>/nasabah">
                                     <i class="ni ni-single-02 text-green"></i>
-                                    <span class="nav-link-text">Data Calon Nasabah</span>
+                                    <span class="nav-link-text">Data Nasabah</span>
                                 </a>
                             </li>
                             <li class="nav-item">

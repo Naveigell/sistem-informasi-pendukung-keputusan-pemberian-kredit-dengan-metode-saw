@@ -25,9 +25,9 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Periode</h3>
+                    <h3 class="mb-0">Tanggal Pengajuan</h3>
                     <p class="text-sm mb-0">
-                        Pilih periode nasabah
+                        Pilih Tanggal Pengajuan
                     </p>
                 </div>
                 <div class="card-body">

@@ -6,18 +6,18 @@ use App\Models\CriteriaModel;
 use App\Models\PerhitunganModel;
 use System\Arrays\Collection;
 
-class SAW
+class SAW 
 {
-    const ELIGIBILITY_MARGIN = 41.25;
+    const ELIGIBILITY_MARGIN = 42.05;
 
     /**
      * If the key is empty, remove the key and value
      *
-     * @param array $data
+     * @param array $data 
      */
     public static function removeNullOrEmptyValue(array &$data)
     {
-        foreach ($data as $key => $value) {
+        foreach ($data as $key => $value) { 
             if (empty($key)) {
                 unset($data[$key]);
             }
@@ -29,7 +29,7 @@ class SAW
      *
      * @param array $data
      */
-    public static function removeNasabahNumericKey(array &$data)
+    public static function removeNasabahNumericKey(array &$data) 
     {
         foreach ($data as $key => $value) {
             foreach ($value as $k => $v) {
@@ -92,7 +92,7 @@ class SAW
     }
 
     /**
-     * Calculate ranking, nasabah name and criteria
+     * 
      *
      * @return array
      */
@@ -101,24 +101,29 @@ class SAW
         $periode = self::parsePeriode();
         $quota = self::parseKuota();
 
+        // mengambil data nasabah beserta kriteria dan nilai sub kriterianya
         $model = new PerhitunganModel();
-        $nasabah = $model->getAll();
+        $nasabah = $model->getAll($periode['date'],$periode['month'],$periode["year"]);
         $nasabahCollection = new Collection($nasabah);
 
         $namaKriteria       = new CriteriaModel();
         $kriteria           = $namaKriteria->all();
         $kriteriaCollection = new Collection($kriteria);
 
+        
         $namaKriteria       = $kriteriaCollection->pluck('nama_kriteria');
         $bobotKriteria      = $kriteriaCollection->pluck('bobot_kriteria');
         $keteranganKriteria = $kriteriaCollection->pluck('ket_kriteria');
 
+        
         $namaNasabah = $nasabahCollection->groupBy('nama_nsb');
 
+        // $key = nama dari nasabah
         foreach ($namaNasabah as $key => $value) {
             $collection = new Collection($value);
             $nilai      = $collection->pluck('nilai');
             $nama       = $collection->pluck('nama_kriteria');
+            
             $namaNasabah[$key]['nilai_fields'] = (is_null($nilai) ? 1 : $nilai);
 
             $combined = [];
@@ -150,27 +155,37 @@ class SAW
             }
         }
 
+        // tambahkan ["data"]
         self::addNasabahData($namaNasabah);
+        // hilangkan angka pada array
         self::removeNasabahNumericKey($namaNasabah);
 
         $namaNasabahCollection = new Collection($namaNasabah);
-        $nilaiFieldsColumn = [];
-
+        $nilaiFieldsColumn = []; //field untuk normalisasi 
         $nilaiFields = $namaNasabahCollection->pluck('nilai_fields');
 
+        // menyatukan nilai fields dari seluruh nasabah menjadi satu kolom
+        // $key = nilai dari masing masing fields
         // merge nilai_fields into each column
         foreach ($nilaiFields as $key => $value) {
             foreach ($value as $k => $v) {
+                // jika yang pertama tidak di set
+                // maka nilai pertama dijadikan acuan
                 if (!isset($nilaiFieldsColumn[$k])) {
                     $nilaiFieldsColumn[$k] = [$v];
                 } else {
+                    // setelah itu nilai selanjutnya pada
+                    // index yang berbeda akan menyesuaikan
+                    // dengan hasil yang telah di set
                     array_push($nilaiFieldsColumn[$k], $v);
                 }
             }
         }
 
+        // dari masing masing nilai fields yang sudah dijadikan dalam satu kolom akan dimasukkan
+        // kedalam simple additive weighting
         // add each column into simple additive weighting library
-        for ($i = 0; $i < count($nilaiFieldsColumn); $i++) {
+        for ($i = 0; $i < count($nilaiFieldsColumn); $i++) {//untuk looping saat dimasukan kdlm simpleadditivew
             SimpleAdditiveWeighting::addData($nilaiFieldsColumn[$i], $bobotKriteria[$i], strtoupper($keteranganKriteria[$i]));
         }
 
@@ -180,19 +195,24 @@ class SAW
         $i = 0;
         // get normalization result then transpose it and add into nasabah normalization
         $transpose = (new Collection(SimpleAdditiveWeighting::normalizationResult()))->transpose();
+
+        // kriteria yang awalnya dikelompolkkan menjadi 1 kolom akan diubah menjadi 1 baris sesuai data dari tiap data nasabah tersebut
         foreach ($namaNasabah as $key => $value) {
             // $t is mean transpose
             $t = count($transpose) <= 0 ? 0 : $transpose[$i++];
             $namaNasabah[$key]['normalization'] = is_array($t) ? $t : [$t]; // check if $t is an array, if not, put it into an array
         }
+
         self::removeNasabahNumericKey($namaNasabah);
 
+        //prefrensi
         // calculate and get the result
         SimpleAdditiveWeighting::calculate();
         $result = SimpleAdditiveWeighting::result();
 
         $i = 0;
         // add the result into nasabah
+        //  hasil result yang telah dijumlahkan dalam simple additive weighting nilainya dimasukan berdasarkan nasabah 
         foreach ($namaNasabah as $key => $value) {
             // $r is result
             $r = is_null($result) || count($result) <= 0 ? 0 : $result[$i++];

@@ -11,7 +11,6 @@ class RankingController extends Controller
 
         view('includes/layout', [
             'content'       => "ranking/ranking.index",
-            'namaKriteria'  => $data["namaKriteria"],
             'namaNasabah'   => $data["namaNasabah"],
             'ranking'       => $data["ranking"],
             'periode'       => isset($_GET["periode"]) && !empty($_GET["periode"]) ? $_GET["periode"] : ""

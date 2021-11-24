@@ -7,6 +7,7 @@ class PerhitunganModel extends Model {
         $where = "";
         if (!is_null($date) && !is_null($month) && !is_null($year)) {
             $where = " WHERE MONTH(periode) = $month AND YEAR(periode) = $year AND CONVERT(DATE_FORMAT(periode,'%d'), INT) = $date";
+            // 30 - 3 - 2021
         }
 
         return $this->query(

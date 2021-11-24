@@ -15,7 +15,7 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Hasil keputusan</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">Laporan</h6>
                 </div>
             </div>
         </div>
@@ -26,9 +26,9 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Periode</h3>
+                    <h3 class="mb-0">Tanggal Pengajuan</h3>
                     <p class="text-sm mb-0">
-                        Pilih periode nasabah
+                        Pilih Tanggal Pengajuan 
                     </p>
                 </div>
                 <div class="card-body">

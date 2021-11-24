@@ -116,8 +116,8 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-control-label" for="periode">Periode</label>
-                                            <input name="periode" type="text" class="form-control " id="periode" placeholder="Masukkan periode ..." disabled>
+                                            <label class="form-control-label" for="periode">Tanggal Pengajuan</label>
+                                            <input name="periode" type="text" class="form-control " id="periode" placeholder="Masukkan Tanggal Pengajuan ..." disabled>
                                         </div>
                                     </div>
                                 </form>
@@ -154,8 +154,8 @@
                                             <td class="text-center"><?= $nasabah[$i]['no_tlp']; ?></td>
                                             <td class="text-center"><?= date('d F Y', strtotime($nasabah[$i]['periode'])); ?></td>
                                             <td>
-                                                <a href="<?= BASE_PATH; ?>/nasabah/edit?id=<?= $nasabah[$i]['id_nsb']; ?>" style="color: white;" type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil-alt"></i>&nbsp; Ubah Biodata</a>
-                                                <a href="<?= BASE_PATH; ?>/nasabah/bobot?id=<?= $nasabah[$i]['id_nsb'];; ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-pencil-alt"></i>&nbsp; Ubah Kriteria</a>
+                                                <a href="<?= BASE_PATH; ?>/nasabah/edit?id=<?= $nasabah[$i]['id_nsb']; ?>" style="color: white;" type="button" class="btn btn-primary btn-sm"><i class="fa fa-pencil-alt"></i>&nbsp; Biodata</a>
+                                                <a href="<?= BASE_PATH; ?>/nasabah/bobot?id=<?= $nasabah[$i]['id_nsb'];; ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-pencil-alt"></i>&nbsp; Kriteria</a>
                                                 <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_nsb']; ?>" type="button" class="btn btn-warning btn-sm button-detail" data-toggle="modal" data-target="#detail-modal"><i class="fa fa-eye"></i>&nbsp; Detail</button>
                                                 <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_nsb']; ?>" type="button" class="btn btn-danger btn-sm button-delete"><i class="fa fa-trash"></i>&nbsp; Hapus</button>
                                             </td>
@@ -202,7 +202,8 @@
                                             emailNasabah.value = res['email'];
                                             noTeleponNasabah.value = res['no_tlp'];
                                             jenisKelaminNasabah.value = res['jenis_kelamin'];
-                                            periodeNasabah.value = new Date(res['periode']).getFullYear();
+                                            const date = new Date(res['periode']);
+                                            periodeNasabah.value = date.getDate() + ' - ' + date.getMonth() + ' - ' + date.getFullYear();
                                         }
                                     },
                                 });

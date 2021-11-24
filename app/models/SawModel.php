@@ -9,6 +9,7 @@ class SawModel extends Model
     {
         $data = [];
         $result = $this->query("SELECT * FROM `kriteria` WHERE kriteria.nama_kriteria IN ('Pendapatan', 'Pekerjaan', 'Jaminan', 'Pengeluaran', 'Usia', 'Jangka waktu')");
+        
         foreach ($result as $item) {
             if (!isset($data[$item["id_kriteria"]])) {
 

@@ -56,7 +56,7 @@
                                             <td class="text-center"><?= $criteria[$i]['bobot_kriteria']; ?></td>
                                             <td class="text-center"><?= $criteria[$i]['ket_kriteria']; ?></td>
                                             <td class="text-center">
-                                                <a href="<?= BASE_PATH; ?>/criteria/edit?id=<?= $criteria[$i]['id_kriteria'] ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-eye"></i>&nbsp; Ubah</a>
+                                                <a href="<?= BASE_PATH; ?>/criteria/edit?id=<?= $criteria[$i]['id_kriteria'] ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-pencil-alt"></i>&nbsp; Ubah</a>
                                                 <button style="color: white;" data-name="<?= $criteria[$i]['nama_kriteria']; ?>" data-id="<?= $criteria[$i]['id_kriteria']; ?>" type="button" class="btn btn-danger btn-sm button-delete"><i class="fa fa-trash"></i>&nbsp; Hapus</button>
                                             </td>
                                         </tr>

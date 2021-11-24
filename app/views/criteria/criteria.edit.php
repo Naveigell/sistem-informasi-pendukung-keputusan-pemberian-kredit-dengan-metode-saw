@@ -113,7 +113,7 @@
                                     </div>
                                 </div>
                             <?php } ?>
-                            <?php for ($i = count($subCriteria); $i < 5; $i++) { ?>
+                            <?php for ($i = count($subCriteria); $i < 4; $i++) { ?>
                                 <div class="form-group row">
                                     <div class="col-md-10">
                                         <input value="" name="sub-kriteria[]" class="form-control" type="text" id="sub-kriteria-<?= $i; ?>" placeholder="Masukkan keterangan sub kriteria ke - <?= $i + 1; ?>">

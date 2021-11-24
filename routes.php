@@ -1,6 +1,9 @@
 <?php
 use System\Router\Route;
 
+//get : nampilin data url
+//post : gk nampilin data/hide
+// nama kls sm nama file itu hrus sma
 $router = new Route();
 $router->get('/', \App\Controllers\DashboardController::class, 'index');
 
@@ -33,4 +36,7 @@ $router->post('/criteria/create', \App\Controllers\CriteriaController::class, 'c
 $router->post('/criteria/update', \App\Controllers\CriteriaController::class, 'update');
 $router->post('/criteria/delete', \App\Controllers\CriteriaController::class, 'delete');
 $router->post('/criteria/update-sub-criteria', \App\Controllers\CriteriaController::class, 'updateSubCriteria');
+
+$router->get('/a', \App\Controllers\LatihanController::class, 'index');
 $router->run();
+

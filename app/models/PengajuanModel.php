@@ -27,17 +27,17 @@ class PengajuanModel extends Model {
             ]);
             $row = $this->insertMultiple("INSERT INTO pengajuan(id_kriteria, id_nsb, id_subkriteria) VALUES".$sql, $bindings);
 
-            $this->connection->commit();
+            $this->connection->commit(); //comit : 2 data diproses
         } catch (\Exception $exception) {
-            $this->connection->rollBack();
+            $this->connection->rollBack(); //rollback : jika yg diisi cmn 1 data saja, dua"nya gk bakal di proses
         }
 
         return $row;
     }
 
-    public function subCriteria($id_user)
+    public function subCriteria($id_nasabah)
     {
-        $result = $this->query("SELECT * FROM $this->table INNER JOIN sub_kriteria ON sub_kriteria.id_subkriteria = pengajuan.id_subkriteria WHERE id_nsb = ?", [$id_user]);
+        $result = $this->query("SELECT * FROM $this->table INNER JOIN sub_kriteria ON sub_kriteria.id_subkriteria = pengajuan.id_subkriteria WHERE id_nsb = ?", [$id_nasabah]);
 
         return $result;
     }
