@@ -90,10 +90,10 @@
     <div class="text">
         <div>
             <div style="font-size: 34px;">
-                LPD DESA PAKRAMAN BEKUL
+                LPD DESA BURUAN
             </div>
             <div style="font-size: 17px; margin-top: 7px;">
-                Jln. Siulan No 130, Penatih Dangin Puri, Kec. Denpasar Timur., Kota Denpasar, Bali
+                Jl. Batukaru No.63-71, Buruan, Penebel, Kabupaten Tabanan, Bali.
             </div>
             <div style="font-size: 17px; margin-top: 7px;">
                 Telp: (0361) 461611
@@ -136,7 +136,7 @@
 <div class="signature" style="height: 200px;">
     <div>
         <div>
-            Denpasar, <?= date('d F Y'); ?>
+            Tabanan, <?= date('d F Y'); ?>
         </div>
         <div>
             Kepala LPD
@@ -146,7 +146,7 @@
         <br>
 
         <div style="margin-top: 100px;">
-            I Made Sudarma 
+            I Ketut Wirayasa
         </div>
     </div>
 </div>

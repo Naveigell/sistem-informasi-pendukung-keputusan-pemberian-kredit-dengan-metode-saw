@@ -65,7 +65,8 @@ CREATE TABLE `nasabah` (
   `email` varchar(35) NOT NULL,
   `no_tlp` varchar(15) NOT NULL,
   `jenis_kelamin` enum('Pria','Wanita') NOT NULL,
-  `periode` date NOT NULL
+  `periode` date NOT NULL,
+  `selesai` integer NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

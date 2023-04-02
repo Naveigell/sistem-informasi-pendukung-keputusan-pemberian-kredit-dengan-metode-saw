@@ -21,44 +21,44 @@
                         <?php if(sessionGet("role") == "admin") { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_PATH; ?>/">
-                                    <i class="ni ni-shop text-primary"></i>
+                                    <i class="fa fa-home text-primary"></i>
                                     <span class="nav-link-text">Dashboard</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_PATH; ?>/criteria">
-                                    <i class="ni ni-collection text-warning"></i>
+                                    <i class="fa fa-paper-plane text-warning"></i>
                                     <span class="nav-link-text">Data Kriteria</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_PATH; ?>/nasabah">
-                                    <i class="ni ni-single-02 text-green"></i>
+                                    <i class="fa fa-users text-green"></i>
                                     <span class="nav-link-text">Data Nasabah</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_PATH; ?>/perhitungan">
-                                    <i class="fa fa-cogs text-primary"></i>
+                                    <i class="fa fa-flag text-primary"></i>
                                     <span class="nav-link-text">Penilaian SAW</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE_PATH; ?>/ranking">
-                                    <i class="fa fa-trophy text-dark"></i>
-                                    <span class="nav-link-text">Hasil Keputusan</span>
-                                </a>
-                            </li>
+<!--                            <li class="nav-item">-->
+<!--                                <a class="nav-link" href="--><?//= BASE_PATH; ?><!--/ranking">-->
+<!--                                    <i class="fa fa-trophy text-dark"></i>-->
+<!--                                    <span class="nav-link-text">Hasil Keputusan</span>-->
+<!--                                </a>-->
+<!--                            </li>-->
                         <?php } else { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_PATH; ?>/">
-                                    <i class="ni ni-shop text-primary"></i>
+                                    <i class="fa fa-home text-primary"></i>
                                     <span class="nav-link-text">Dashboard</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_PATH; ?>/laporan">
-                                    <i class="fa fa-file text-yellow"></i>
+                                    <i class="fa fa-download text-success"></i>
                                     <span class="nav-link-text">Laporan</span>
                                 </a>
                             </li>

@@ -169,12 +169,30 @@ class NasabahController extends Controller {
         }
     }
 
+    public function finish()
+    {
+        $request = $this->request->getAllData();
+
+        $model = new NasabahModel();
+        $model->update([
+            "selesai" => 1,
+        ], [
+            "id_nsb"  => $request->id
+        ]);
+
+        http_response_code(202);
+        echo json_encode([
+            "message" => "Nasabah berhasil diubah",
+            "success" => true,
+        ]);
+    }
+
     public function create()
     {
         $this->validator->make($_POST, [
             "nama"                  => ["rules" => "required",],
             "no_kk"                 => ["rules" => "required",],
-            "nik"                   => ["rules" => "required|min:16",],
+            "nik"                   => ["rules" => "required|min:12",],
             "tempat_lahir"          => ["rules" => "required",],
             "tanggal_lahir"         => ["rules" => "required",],
             "alamat"                => ["rules" => "required",],
@@ -189,7 +207,7 @@ class NasabahController extends Controller {
         $request = $this->request->getAllData();
 
         if ($model->countNIK($request->nik) > 0) {
-            $this->session->set('error-nik', ['Nomor nik sudah digunakan']);
+            $this->session->set('error-nik', ['Nomor nik sudah digunakan dan periode belum berakhir']);
             redirect('/nasabah/insert');
 
 

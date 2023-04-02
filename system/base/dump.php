@@ -5,3 +5,10 @@ function dump(...$args){
     var_dump(...$args);
     echo "</pre>";
 }
+
+if (!function_exists('dd')) {
+    function dd() {
+        dump(func_get_args());
+        exit();
+    }
+}

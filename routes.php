@@ -20,6 +20,7 @@ $router->post('/nasabah/bobot', \App\Controllers\NasabahController::class, 'upda
 $router->post('/nasabah/create', \App\Controllers\NasabahController::class, 'create');
 $router->post('/nasabah/update', \App\Controllers\NasabahController::class, 'update');
 $router->post('/nasabah/delete', \App\Controllers\NasabahController::class, 'delete');
+$router->post('/nasabah/finish', \App\Controllers\NasabahController::class, 'finish');
 
 $router->get('/perhitungan', \App\Controllers\PerhitunganController::class, 'index');
 

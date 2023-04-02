@@ -1,4 +1,4 @@
-<nav class="navbar navbar-top navbar-expand navbar-dark bg-success border-bottom">
+<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Search form -->
@@ -21,8 +21,7 @@
                 </div>
             </ul>
             <ul class="navbar-nav align-items-center col-9 text text-center text-white font-weight-bold justify-content-center align-content-center">
-                SISTEM PENDUKUNG KEPUTUSAN KELAYAKAN PEMBERIAN KREDIT <br/>
-                LPD DESA PAKRAMAN BEKUL
+                SISTEM PENDUKUNG KEPUTUSAN PEMBERIAN KREDIT <br/> LPD DESA BURUAN
 <!--                <li class="nav-item d-xl-none">-->
 <!--                    <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">-->
 <!--                        <div class="sidenav-toggler-inner">-->

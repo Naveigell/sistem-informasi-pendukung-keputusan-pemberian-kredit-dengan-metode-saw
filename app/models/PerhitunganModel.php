@@ -4,9 +4,9 @@ namespace App\Models;
 class PerhitunganModel extends Model {
     public function getAll($date = null, $month = null, $year = null)
     {
-        $where = "";
+        $where = " WHERE nasabah.selesai = 0 ";
         if (!is_null($date) && !is_null($month) && !is_null($year)) {
-            $where = " WHERE MONTH(periode) = $month AND YEAR(periode) = $year AND CONVERT(DATE_FORMAT(periode,'%d'), INT) = $date";
+            $where = " AND WHERE MONTH(periode) = $month AND YEAR(periode) = $year AND CONVERT(DATE_FORMAT(periode,'%d'), INT) = $date";
             // 30 - 3 - 2021
         }
 

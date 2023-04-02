@@ -4,7 +4,7 @@
  * @var $nasabah
  */
 ?>
-<div class="header bg-success pb-6">
+<div class="header bg-primary pb-6">
     <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center py-4">
@@ -158,6 +158,9 @@
                                                 <a href="<?= BASE_PATH; ?>/nasabah/bobot?id=<?= $nasabah[$i]['id_nsb'];; ?>" style="color: white;" type="button" class="btn btn-info btn-sm"><i class="fa fa-pencil-alt"></i>&nbsp; Kriteria</a>
                                                 <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_nsb']; ?>" type="button" class="btn btn-warning btn-sm button-detail" data-toggle="modal" data-target="#detail-modal"><i class="fa fa-eye"></i>&nbsp; Detail</button>
                                                 <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_nsb']; ?>" type="button" class="btn btn-danger btn-sm button-delete"><i class="fa fa-trash"></i>&nbsp; Hapus</button>
+                                                <?php if (!$nasabah[$i]['selesai']): ?>
+                                                    <button style="color: white;" data-name="<?= $nasabah[$i]['nama_nsb']; ?>" data-id="<?= $nasabah[$i]['id_nsb']; ?>" type="button" class="btn btn-success btn-sm button-finish"><i class="fa fa-check"></i>&nbsp; Selesai</button>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -211,6 +214,42 @@
                         }
 
                         const deleteButtons = $(".button-delete");
+                        const finishButtons = $('.button-finish');
+
+                        for (const button of finishButtons) {
+                            button.addEventListener('click', function (evt) {
+                                const id = evt.target.getAttribute('data-id');
+                                const name = evt.target.getAttribute('data-name');
+
+                                Swal.fire({
+                                    title: `Yakin selesaikan nasabah <b>${name}</b>?`,
+                                    text: "Data yang diubah tidak akan bisa dikembalikan",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#2dce89',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Selesai',
+                                    cancelButtonText: 'Batal'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        $.ajax({
+                                            type: 'POST',
+                                            data: { id },
+                                            url: `<?= BASE_PATH; ?>/nasabah/finish?id=${id}`,
+                                            success: function (response) {
+                                                Swal.fire(
+                                                    'Berhasil diselesaikan!',
+                                                    response.message,
+                                                    'success'
+                                                ).then(() => {
+                                                    window.location.reload();
+                                                });
+                                            }
+                                        });
+                                    }
+                                })
+                            });
+                        }
 
                         for (const button of deleteButtons) {
                             button.addEventListener('click', function (evt) {
@@ -232,7 +271,6 @@
                                             type: 'POST',
                                             url: `<?= BASE_PATH; ?>/nasabah/delete?id=${id}`,
                                             success: function (response) {
-                                                console.log(response)
                                                 Swal.fire(
                                                     'Berhasil dihapus!',
                                                     response.message,

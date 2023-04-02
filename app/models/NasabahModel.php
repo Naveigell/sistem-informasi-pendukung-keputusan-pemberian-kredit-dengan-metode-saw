@@ -16,7 +16,7 @@ class NasabahModel extends Model {
 
     public function countNIK($nik)
     {
-        $result = $this->query("SELECT COUNT(*) AS _total FROM $this->table WHERE no_nik = ?", [$nik]);
+        $result = $this->query("SELECT COUNT(*) AS _total FROM $this->table WHERE no_nik = ? AND selesai = 0", [$nik]);
 
         if (count($result) > 0) {
             return $result[0]['_total'];

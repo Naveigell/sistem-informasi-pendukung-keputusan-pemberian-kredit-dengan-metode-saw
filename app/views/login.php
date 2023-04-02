@@ -12,8 +12,8 @@
             <div class="header-body text-center mb-2">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <h1 class="text-white">Sistem Informasi Pendukung Keputusan</h1>
-                        <h1 class="text-white">Kelayakan Pemberian Kredit LPD Desa Pakraman Bekul</h1>
+                        <h1 class="text-white">Sistem Informasi Pendukung Keputusan Pemberian Kredit</h1>
+                        <h1 class="text-white">LPD Desa Buruan</h1>
                         <p class="text-lead text-white">Silakan masukkan username dan password agar dapat mengakses sistem</p>
                     </div>
                 </div>

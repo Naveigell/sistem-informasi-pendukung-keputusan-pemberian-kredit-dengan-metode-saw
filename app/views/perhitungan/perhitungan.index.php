@@ -9,7 +9,7 @@
  * @var $periode
  */
 ?>
-<div class="header bg-success pb-6">
+<div class="header bg-primary pb-6">
     <div class="container-fluid">
         <div class="header-body">
             <div class="row align-items-center py-4">
@@ -149,9 +149,9 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Nilai Preferensi</h3>
+                    <h3 class="mb-0">Perangkingan</h3>
                     <p class="text-sm mb-0">
-                        Halaman ini adalah tampilan saat sistem melakukan proses preferensi
+                        Halaman ini adalah tampilan saat sistem melakukan perangkingan
                     </p>
                 </div>
                 <div class="table-responsive">
@@ -162,10 +162,11 @@
                                     <thead class="thead-light">
                                     <tr role="row">
                                         <th class="sorting_asc text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1" aria-sort="ascending" aria-label="" style="width: 20px;">
-                                            No
+                                            Ranking
                                         </th>
-                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
-                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Total Nilai</th>
+                                        <th class="sorting" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nama</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">NIK</th>
+                                        <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Nilai</th>
                                         <th class="sorting text-center" tabindex="0" aria-controls="datatable-basic" rowspan="1" colspan="1">Keterangan</th>
                                     </tr>
                                     </thead>
@@ -174,6 +175,7 @@
                                         <tr role="row" class="even">
                                             <td class="sorting_1 text-center"><?= ++$i; ?></td>
                                             <td class="sorting_1"><?= $nasabah; ?></td>
+                                            <td class="sorting_1 text-center"><?= $namaNasabah[$nasabah]['data']["no_nik"]; ?></td>
                                             <td class="sorting_1 text-center"><?= $namaNasabah[$nasabah]['result']; ?></td>
                                             <td class="sorting_1 text-center text <?= $namaNasabah[$nasabah]['layak'] ? 'text-success' : 'text-danger' ?>"><?= $namaNasabah[$nasabah]['layak'] ? 'Layak' : 'Tidak Layak'; ?></td>
                                         </tr>
