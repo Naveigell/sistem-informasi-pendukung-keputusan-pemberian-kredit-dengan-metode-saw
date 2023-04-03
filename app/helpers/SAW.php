@@ -8,7 +8,7 @@ use System\Arrays\Collection;
 
 class SAW 
 {
-    const ELIGIBILITY_MARGIN = 42.05;
+    const ELIGIBILITY_MARGIN = 43.75;
 
     /**
      * If the key is empty, remove the key and value
