@@ -6,7 +6,7 @@ class PerhitunganModel extends Model {
     {
         $where = " WHERE nasabah.selesai = 0 ";
         if (!is_null($date) && !is_null($month) && !is_null($year)) {
-            $where = " AND WHERE MONTH(periode) = $month AND YEAR(periode) = $year AND CONVERT(DATE_FORMAT(periode,'%d'), INT) = $date";
+            $where .= " AND MONTH(periode) = $month AND YEAR(periode) = $year AND DAY(periode) = $date";
             // 30 - 3 - 2021
         }
 
