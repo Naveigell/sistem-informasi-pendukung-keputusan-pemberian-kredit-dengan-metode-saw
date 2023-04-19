@@ -143,7 +143,7 @@
                             <div class="form-row">
                                 <div class="col-md-12 mb-3">
                                     <label class="form-control-label" for="periode">Tanggal Pengajuan</label>
-                                    <input value="<?= date("Y-m", strtotime($nasabah['periode'])); ?>" name="periode" type="month" class="form-control <?= flashHas('error-periode') ? 'is-invalid' : ''; ?>" id="periode" placeholder="Masukkan periode ...">
+                                    <input value="<?= date("Y-m-d", strtotime($nasabah['periode'])); ?>" name="periode" type="date" class="form-control <?= flashHas('error-periode') ? 'is-invalid' : ''; ?>" id="periode" placeholder="Masukkan periode ...">
                                     <div class="invalid-feedback">
                                         <?= flashGet('error-periode')[0] ?>
                                     </div>
